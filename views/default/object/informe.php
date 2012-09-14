@@ -64,7 +64,7 @@ if (elgg_in_context('widgets')) {
 if ($full) {
 
 	$body = elgg_view('output/longtext', array(
-		'value' => $informe->description,
+		'value' => $informe->getBody(),
 		'class' => 'informe-post',
 	));
 

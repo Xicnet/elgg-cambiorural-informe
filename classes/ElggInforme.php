@@ -44,4 +44,24 @@ class ElggInforme extends ElggObject {
 		return $this->topics . $this->outlook;
 	}
 
+
+	public function getBody() {
+		// Compose body from report fields
+		if (!empty($this->body)) {
+			//return $this->body;
+		}
+		$body = "";
+
+		// Read-only fields
+		$body.= elgg_view('output/longtext', array('value' => $this->building));
+
+		// Sections
+
+		// 
+
+		$body.= $this->description;
+
+		$this->body = $body;
+		return $this->body;
+	}
 }
