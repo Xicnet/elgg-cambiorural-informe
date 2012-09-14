@@ -63,6 +63,13 @@ $building_input = elgg_view('input/text', array(
 	'value' => $vars['building']
 ));
 
+$meeting_place_label = elgg_echo('meeting_place');
+$meeting_place_input = elgg_view('input/text', array(
+	'name' => 'meeting_place',
+	'id' => 'informe_meeting_place',
+	'value' => $vars['meeting_place']
+));
+
 $excerpt_label = elgg_echo('informe:excerpt');
 $excerpt_input = elgg_view('input/text', array(
 	'name' => 'excerpt',
@@ -174,6 +181,11 @@ $draft_warning
 <div>
 	<label for="informe_building">$building_label</label>
 	$building_input
+</div>
+
+<div>
+	<label for="informe_meeting_place">$meeting_place_label</label>
+	$meeting_place_input
 </div>
 
 <div>

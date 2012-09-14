@@ -54,6 +54,7 @@ class ElggInforme extends ElggObject {
 
 		// Read-only fields
 		$body.= elgg_view('output/longtext', array('value' => $this->building));
+		$body.= elgg_view('output/longtext', array('value' => $this->meeting_place));
 
 		// Sections
 
