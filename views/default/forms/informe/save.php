@@ -156,7 +156,7 @@ $draft_warning
 
 <div>
 	<label for="informe_topics">$topics_label</label>
-	$topics_input XXX
+	$topics_input
 </div>
 
 <div>

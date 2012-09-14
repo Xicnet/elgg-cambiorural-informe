@@ -28,18 +28,15 @@ function informe_get_page_content_read($guid = NULL) {
 	}
 
 	$return['title'] = $informe->title;
-	$return['topics'] = $informe->topics;
 
 	$container = $informe->getContainerEntity();
 	$crumbs_title = $container->name;
 	if (elgg_instanceof($container, 'group')) {
 		elgg_push_breadcrumb($crumbs_title, "informe/group/$container->guid/all");
-	} 
-	/*
-	else {
+	} else {
 		elgg_push_breadcrumb($crumbs_title, "informe/owner/$container->username");
 	}
-	*/
+
 	elgg_push_breadcrumb($informe->title);
 	$return['content'] = elgg_view_entity($informe, array('full_view' => true));
 	//check to see if comment are on
@@ -345,6 +342,7 @@ function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 	// input names => defaults
 	$values = array(
 		'title' => NULL,
+		'topics' => NULL,
 		'description' => NULL,
 		'status' => 'published',
 		'access_id' => ACCESS_DEFAULT,
