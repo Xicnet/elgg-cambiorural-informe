@@ -44,6 +44,7 @@ $old_status = $informe->status;
 $values = array(
 	'title' => '',
 	'topics' => '',
+	'building' => '',
 	'description' => '',
 	'status' => 'draft',
 	'access_id' => ACCESS_DEFAULT,
@@ -54,7 +55,7 @@ $values = array(
 );
 
 // fail if a required entity isn't set
-$required = array('title', 'description', 'topics');
+$required = array('title', 'description', 'topics', 'building');
 
 // load from POST and do sanity and access checking
 foreach ($values as $name => $default) {
@@ -69,6 +70,7 @@ foreach ($values as $name => $default) {
 	}
 
 	switch ($name) {
+		case 'building':
 		case 'topics':
 			if ($value) {
 				$values[$name] = $value;

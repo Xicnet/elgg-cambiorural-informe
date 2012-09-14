@@ -56,6 +56,13 @@ $topics_input = elgg_view('input/text', array(
 	'value' => $vars['topics']
 ));
 
+$building_label = elgg_echo('building');
+$building_input = elgg_view('input/text', array(
+	'name' => 'building',
+	'id' => 'informe_building',
+	'value' => $vars['building']
+));
+
 $excerpt_label = elgg_echo('informe:excerpt');
 $excerpt_input = elgg_view('input/text', array(
 	'name' => 'excerpt',
@@ -121,7 +128,9 @@ $container_guid_input = '';
 }
 $guid_input = elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['guid']));
 
-if (!elgg_instanceof(elgg_get_page_owner_guid(), 'group')) {
+$group = get_entity(elgg_get_page_owner_guid());
+
+if (!elgg_instanceof($group, 'group')) {
 
 	$group_options = array();
 
@@ -138,6 +147,9 @@ if (!elgg_instanceof(elgg_get_page_owner_guid(), 'group')) {
 		'value' => $vars['group_guid'],
 		'options_values' => $group_options,
 	));
+} else {
+	$group_label = elgg_echo('group');
+	$group_input = elgg_view('output/url', Array('text' => $group->name, 'href' => $group->getURL()));
 }
 
 echo <<<___HTML
@@ -157,6 +169,11 @@ $draft_warning
 <div>
 	<label for="informe_topics">$topics_label</label>
 	$topics_input
+</div>
+
+<div>
+	<label for="informe_building">$building_label</label>
+	$building_input
 </div>
 
 <div>
