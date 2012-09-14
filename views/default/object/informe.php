@@ -1,42 +1,42 @@
 <?php
 /**
- * View for blog objects
+ * View for informe objects
  *
  * @package Blog
  */
 
 $full = elgg_extract('full_view', $vars, FALSE);
-$blog = elgg_extract('entity', $vars, FALSE);
+$informe = elgg_extract('entity', $vars, FALSE);
 
-if (!$blog) {
+if (!$informe) {
 	return TRUE;
 }
 
-$owner = $blog->getOwnerEntity();
-$container = $blog->getContainerEntity();
+$owner = $informe->getOwnerEntity();
+$container = $informe->getContainerEntity();
 $categories = elgg_view('output/categories', $vars);
-$excerpt = $blog->excerpt;
+$excerpt = $informe->excerpt;
 if (!$excerpt) {
-	$excerpt = elgg_get_excerpt($blog->description);
+	$excerpt = elgg_get_excerpt($informe->description);
 }
 
 $owner_icon = elgg_view_entity_icon($owner, 'tiny');
 $owner_link = elgg_view('output/url', array(
-	'href' => "blog/owner/$owner->username",
+	'href' => "informe/owner/$owner->username",
 	'text' => $owner->name,
 	'is_trusted' => true,
 ));
 $author_text = elgg_echo('byline', array($owner_link));
-$date = elgg_view_friendly_time($blog->time_created);
+$date = elgg_view_friendly_time($informe->time_created);
 
 // The "on" status changes for comments, so best to check for !Off
-if ($blog->comments_on != 'Off') {
-	$comments_count = $blog->countComments();
+if ($informe->comments_on != 'Off') {
+	$comments_count = $informe->countComments();
 	//only display if there are commments
 	if ($comments_count != 0) {
 		$text = elgg_echo("comments") . " ($comments_count)";
 		$comments_link = elgg_view('output/url', array(
-			'href' => $blog->getURL() . '#blog-comments',
+			'href' => $informe->getURL() . '#informe-comments',
 			'text' => $text,
 			'is_trusted' => true,
 		));
@@ -49,7 +49,7 @@ if ($blog->comments_on != 'Off') {
 
 $metadata = elgg_view_menu('entity', array(
 	'entity' => $vars['entity'],
-	'handler' => 'blog',
+	'handler' => 'informe',
 	'sort_by' => 'priority',
 	'class' => 'elgg-menu-hz',
 ));
@@ -64,12 +64,12 @@ if (elgg_in_context('widgets')) {
 if ($full) {
 
 	$body = elgg_view('output/longtext', array(
-		'value' => $blog->description,
-		'class' => 'blog-post',
+		'value' => $informe->description,
+		'class' => 'informe-post',
 	));
 
 	$params = array(
-		'entity' => $blog,
+		'entity' => $informe,
 		'title' => false,
 		'metadata' => $metadata,
 		'subtitle' => $subtitle,
@@ -87,7 +87,7 @@ if ($full) {
 	// brief view
 
 	$params = array(
-		'entity' => $blog,
+		'entity' => $informe,
 		'metadata' => $metadata,
 		'subtitle' => $subtitle,
 		'content' => $excerpt,

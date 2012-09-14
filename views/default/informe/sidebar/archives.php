@@ -7,18 +7,18 @@ $loggedin_user = elgg_get_logged_in_user_entity();
 $page_owner = elgg_get_page_owner_entity();
 
 if (elgg_instanceof($page_owner, 'user')) {
-	$url_segment = 'blog/archive/' . $page_owner->username;
+	$url_segment = 'informe/archive/' . $page_owner->username;
 } else {
-	$url_segment = 'blog/group/' . $page_owner->getGUID() . '/archive';
+	$url_segment = 'informe/group/' . $page_owner->getGUID() . '/archive';
 }
 
 // This is a limitation of the URL schema.
 if ($page_owner && $vars['page'] != 'friends') {
-	$dates = get_entity_dates('object', 'blog', $page_owner->getGUID());
+	$dates = get_entity_dates('object', 'informe', $page_owner->getGUID());
 	
 	if ($dates) {
-		$title = elgg_echo('blog:archives');
-		$content = '<ul class="blog-archives">';
+		$title = elgg_echo('informe:archives');
+		$content = '<ul class="informe-archives">';
 		foreach ($dates as $date) {
 			$timestamplow = mktime(0, 0, 0, substr($date,4,2) , 1, substr($date, 0, 4));
 			$timestamphigh = mktime(0, 0, 0, ((int) substr($date, 4, 2)) + 1, 1, substr($date, 0, 4));

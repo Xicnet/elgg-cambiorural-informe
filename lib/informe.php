@@ -7,53 +7,56 @@
 
 
 /**
- * Get page components to view a blog post.
+ * Get page components to view a informe post.
  *
- * @param int $guid GUID of a blog entity.
+ * @param int $guid GUID of a informe entity.
  * @return array
  */
-function blog_get_page_content_read($guid = NULL) {
+function informe_get_page_content_read($guid = NULL) {
 
 	$return = array();
 
-	$blog = get_entity($guid);
+	$informe = get_entity($guid);
 
-	// no header or tabs for viewing an individual blog
+	// no header or tabs for viewing an individual informe
 	$return['filter'] = '';
 
-	if (!elgg_instanceof($blog, 'object', 'blog')) {
+	if (!elgg_instanceof($informe, 'object', 'informe')) {
 		register_error(elgg_echo('noaccess'));
 		$_SESSION['last_forward_from'] = current_page_url();
 		forward('');
 	}
 
-	$return['title'] = $blog->title;
+	$return['title'] = $informe->title;
+	$return['topics'] = $informe->topics;
 
-	$container = $blog->getContainerEntity();
+	$container = $informe->getContainerEntity();
 	$crumbs_title = $container->name;
 	if (elgg_instanceof($container, 'group')) {
-		elgg_push_breadcrumb($crumbs_title, "blog/group/$container->guid/all");
-	} else {
-		elgg_push_breadcrumb($crumbs_title, "blog/owner/$container->username");
+		elgg_push_breadcrumb($crumbs_title, "informe/group/$container->guid/all");
+	} 
+	/*
+	else {
+		elgg_push_breadcrumb($crumbs_title, "informe/owner/$container->username");
 	}
-
-	elgg_push_breadcrumb($blog->title);
-	$return['content'] = elgg_view_entity($blog, array('full_view' => true));
+	*/
+	elgg_push_breadcrumb($informe->title);
+	$return['content'] = elgg_view_entity($informe, array('full_view' => true));
 	//check to see if comment are on
-	if ($blog->comments_on != 'Off') {
-		$return['content'] .= elgg_view_comments($blog);
+	if ($informe->comments_on != 'Off') {
+		$return['content'] .= elgg_view_comments($informe);
 	}
 
 	return $return;
 }
 
 /**
- * Get page components to list a user's or all blogs.
+ * Get page components to list a user's or all informes.
  *
- * @param int $owner_guid The GUID of the page owner or NULL for all blogs
+ * @param int $owner_guid The GUID of the page owner or NULL for all informes
  * @return array
  */
-function blog_get_page_content_list($container_guid = NULL) {
+function informe_get_page_content_list($container_guid = NULL) {
 
 	$return = array();
 
@@ -61,7 +64,7 @@ function blog_get_page_content_list($container_guid = NULL) {
 
 	$options = array(
 		'type' => 'object',
-		'subtype' => 'blog',
+		'subtype' => 'informe',
 		'full_view' => FALSE,
 	);
 
@@ -75,7 +78,7 @@ function blog_get_page_content_list($container_guid = NULL) {
 		if (!$container) {
 
 		}
-		$return['title'] = elgg_echo('blog:title:user_blogs', array($container->name));
+		$return['title'] = elgg_echo('informe:title:user_informes', array($container->name));
 
 		$crumbs_title = $container->name;
 		elgg_push_breadcrumb($crumbs_title);
@@ -90,14 +93,14 @@ function blog_get_page_content_list($container_guid = NULL) {
 		}
 	} else {
 		$return['filter_context'] = 'all';
-		$return['title'] = elgg_echo('blog:title:all_blogs');
+		$return['title'] = elgg_echo('informe:title:all_informes');
 		elgg_pop_breadcrumb();
-		elgg_push_breadcrumb(elgg_echo('blog:blogs'));
+		elgg_push_breadcrumb(elgg_echo('informe:informes'));
 	}
 
 	elgg_register_title_button();
 
-	// show all posts for admin or users looking at their own blogs
+	// show all posts for admin or users looking at their own informes
 	// show only published posts for other users.
 	if (!(elgg_is_admin_logged_in() || (elgg_is_logged_in() && $container_guid == $loggedin_userid))) {
 		$options['metadata_name_value_pairs'] = array(
@@ -107,7 +110,7 @@ function blog_get_page_content_list($container_guid = NULL) {
 
 	$list = elgg_list_entities_from_metadata($options);
 	if (!$list) {
-		$return['content'] = elgg_echo('blog:none');
+		$return['content'] = elgg_echo('informe:none');
 	} else {
 		$return['content'] = $list;
 	}
@@ -121,20 +124,20 @@ function blog_get_page_content_list($container_guid = NULL) {
  * @param int $user_guid
  * @return array
  */
-function blog_get_page_content_friends($user_guid) {
+function informe_get_page_content_friends($user_guid) {
 
 	$user = get_user($user_guid);
 	if (!$user) {
-		forward('blog/all');
+		forward('informe/all');
 	}
 
 	$return = array();
 
 	$return['filter_context'] = 'friends';
-	$return['title'] = elgg_echo('blog:title:friends');
+	$return['title'] = elgg_echo('informe:title:friends');
 
 	$crumbs_title = $user->name;
-	elgg_push_breadcrumb($crumbs_title, "blog/owner/{$user->username}");
+	elgg_push_breadcrumb($crumbs_title, "informe/owner/{$user->username}");
 	elgg_push_breadcrumb(elgg_echo('friends'));
 
 	elgg_register_title_button();
@@ -145,7 +148,7 @@ function blog_get_page_content_friends($user_guid) {
 	} else {
 		$options = array(
 			'type' => 'object',
-			'subtype' => 'blog',
+			'subtype' => 'informe',
 			'full_view' => FALSE,
 		);
 
@@ -167,7 +170,7 @@ function blog_get_page_content_friends($user_guid) {
 
 		$list = elgg_list_entities_from_metadata($options);
 		if (!$list) {
-			$return['content'] = elgg_echo('blog:none');
+			$return['content'] = elgg_echo('informe:none');
 		} else {
 			$return['content'] = $list;
 		}
@@ -177,14 +180,14 @@ function blog_get_page_content_friends($user_guid) {
 }
 
 /**
- * Get page components to show blogs with publish dates between $lower and $upper
+ * Get page components to show informes with publish dates between $lower and $upper
  *
  * @param int $owner_guid The GUID of the owner of this page
  * @param int $lower      Unix timestamp
  * @param int $upper      Unix timestamp
  * @return array
  */
-function blog_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
+function informe_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
 
 	$now = time();
 
@@ -193,12 +196,12 @@ function blog_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
 
 	$crumbs_title = $owner->name;
 	if (elgg_instanceof($owner, 'user')) {
-		$url = "blog/owner/{$owner->username}";
+		$url = "informe/owner/{$owner->username}";
 	} else {
-		$url = "blog/group/$owner->guid/all";
+		$url = "informe/group/$owner->guid/all";
 	}
 	elgg_push_breadcrumb($crumbs_title, $url);
-	elgg_push_breadcrumb(elgg_echo('blog:archives'));
+	elgg_push_breadcrumb(elgg_echo('informe:archives'));
 
 	if ($lower) {
 		$lower = (int)$lower;
@@ -210,7 +213,7 @@ function blog_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
 
 	$options = array(
 		'type' => 'object',
-		'subtype' => 'blog',
+		'subtype' => 'informe',
 		'full_view' => FALSE,
 	);
 
@@ -240,7 +243,7 @@ function blog_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
 
 	$list = elgg_list_entities_from_metadata($options);
 	if (!$list) {
-		$content .= elgg_echo('blog:none');
+		$content .= elgg_echo('informe:none');
 	} else {
 		$content .= $list;
 	}
@@ -255,60 +258,60 @@ function blog_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
 }
 
 /**
- * Get page components to edit/create a blog post.
+ * Get page components to edit/create a informe post.
  *
  * @param string  $page     'edit' or 'new'
- * @param int     $guid     GUID of blog post or container
+ * @param int     $guid     GUID of informe post or container
  * @param int     $revision Annotation id for revision to edit (optional)
  * @return array
  */
-function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
+function informe_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 
-	elgg_load_js('elgg.blog');
+	elgg_load_js('elgg.informe');
 
 	$return = array(
 		'filter' => '',
 	);
 
 	$vars = array();
-	$vars['id'] = 'blog-post-edit';
-	$vars['name'] = 'blog_post';
+	$vars['id'] = 'informe-post-edit';
+	$vars['name'] = 'informe_post';
 	$vars['class'] = 'elgg-form-alt';
 
 	if ($page == 'edit') {
-		$blog = get_entity((int)$guid);
+		$informe = get_entity((int)$guid);
 
-		$title = elgg_echo('blog:edit');
+		$title = elgg_echo('informe:edit');
 
-		if (elgg_instanceof($blog, 'object', 'blog') && $blog->canEdit()) {
-			$vars['entity'] = $blog;
+		if (elgg_instanceof($informe, 'object', 'informe') && $informe->canEdit()) {
+			$vars['entity'] = $informe;
 
-			$title .= ": \"$blog->title\"";
+			$title .= ": \"$informe->title\"";
 
 			if ($revision) {
 				$revision = elgg_get_annotation_from_id((int)$revision);
 				$vars['revision'] = $revision;
-				$title .= ' ' . elgg_echo('blog:edit_revision_notice');
+				$title .= ' ' . elgg_echo('informe:edit_revision_notice');
 
 				if (!$revision || !($revision->entity_guid == $guid)) {
-					$content = elgg_echo('blog:error:revision_not_found');
+					$content = elgg_echo('informe:error:revision_not_found');
 					$return['content'] = $content;
 					$return['title'] = $title;
 					return $return;
 				}
 			}
 
-			$body_vars = blog_prepare_form_vars($blog, $revision);
+			$body_vars = informe_prepare_form_vars($informe, $revision);
 
-			elgg_push_breadcrumb($blog->title, $blog->getURL());
+			elgg_push_breadcrumb($informe->title, $informe->getURL());
 			elgg_push_breadcrumb(elgg_echo('edit'));
 			
-			elgg_load_js('elgg.blog');
+			elgg_load_js('elgg.informe');
 
-			$content = elgg_view_form('blog/save', $vars, $body_vars);
-			$sidebar = elgg_view('blog/sidebar/revisions', $vars);
+			$content = elgg_view_form('informe/save', $vars, $body_vars);
+			$sidebar = elgg_view('informe/sidebar/revisions', $vars);
 		} else {
-			$content = elgg_echo('blog:error:cannot_edit_post');
+			$content = elgg_echo('informe:error:cannot_edit_post');
 		}
 	} else {
 		if (!$guid) {
@@ -317,11 +320,11 @@ function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 			$container = get_entity($guid);
 		}
 
-		elgg_push_breadcrumb(elgg_echo('blog:add'));
-		$body_vars = blog_prepare_form_vars($blog);
+		elgg_push_breadcrumb(elgg_echo('informe:add'));
+		$body_vars = informe_prepare_form_vars($informe);
 
-		$title = elgg_echo('blog:add');
-		$content = elgg_view_form('blog/save', $vars, $body_vars);
+		$title = elgg_echo('informe:add');
+		$content = elgg_view_form('informe/save', $vars, $body_vars);
 	}
 
 	$return['title'] = $title;
@@ -331,13 +334,13 @@ function blog_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 }
 
 /**
- * Pull together blog variables for the save form
+ * Pull together informe variables for the save form
  *
  * @param ElggBlog       $post
  * @param ElggAnnotation $revision
  * @return array
  */
-function blog_prepare_form_vars($post = NULL, $revision = NULL) {
+function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 
 	// input names => defaults
 	$values = array(
@@ -361,14 +364,14 @@ function blog_prepare_form_vars($post = NULL, $revision = NULL) {
 		}
 	}
 
-	if (elgg_is_sticky_form('blog')) {
-		$sticky_values = elgg_get_sticky_values('blog');
+	if (elgg_is_sticky_form('informe')) {
+		$sticky_values = elgg_get_sticky_values('informe');
 		foreach ($sticky_values as $key => $value) {
 			$values[$key] = $value;
 		}
 	}
 	
-	elgg_clear_sticky_form('blog');
+	elgg_clear_sticky_form('informe');
 
 	if (!$post) {
 		return $values;
@@ -382,14 +385,14 @@ function blog_prepare_form_vars($post = NULL, $revision = NULL) {
 
 	// display a notice if there's an autosaved annotation
 	// and we're not editing it.
-	if ($auto_save_annotations = $post->getAnnotations('blog_auto_save', 1)) {
+	if ($auto_save_annotations = $post->getAnnotations('informe_auto_save', 1)) {
 		$auto_save = $auto_save_annotations[0];
 	} else {
 		$auto_save == FALSE;
 	}
 
 	if ($auto_save && $auto_save->id != $revision->id) {
-		$values['draft_warning'] = elgg_echo('blog:messages:warning:draft');
+		$values['draft_warning'] = elgg_echo('informe:messages:warning:draft');
 	}
 
 	return $values;
@@ -400,7 +403,7 @@ function blog_prepare_form_vars($post = NULL, $revision = NULL) {
  *
  * @param string $page
  */
-function blog_url_forwarder($page) {
+function informe_url_forwarder($page) {
 	global $CONFIG;
 
 	// group usernames
@@ -409,7 +412,7 @@ function blog_url_forwarder($page) {
 		$guid = $matches[1];
 		$entity = get_entity($guid);
 		if ($entity) {
-			$url = "{$CONFIG->wwwroot}blog/group/$guid/all";
+			$url = "{$CONFIG->wwwroot}informe/group/$guid/all";
 			register_error(elgg_echo("changebookmark"));
 			forward($url);
 		}
@@ -427,19 +430,19 @@ function blog_url_forwarder($page) {
 
 	switch ($page[1]) {
 		case "read":
-			$url = "{$CONFIG->wwwroot}blog/view/{$page[2]}/{$page[3]}";
+			$url = "{$CONFIG->wwwroot}informe/view/{$page[2]}/{$page[3]}";
 			break;
 		case "archive":
-			$url = "{$CONFIG->wwwroot}blog/archive/{$page[0]}/{$page[2]}/{$page[3]}";
+			$url = "{$CONFIG->wwwroot}informe/archive/{$page[0]}/{$page[2]}/{$page[3]}";
 			break;
 		case "friends":
-			$url = "{$CONFIG->wwwroot}blog/friends/{$page[0]}";
+			$url = "{$CONFIG->wwwroot}informe/friends/{$page[0]}";
 			break;
 		case "new":
-			$url = "{$CONFIG->wwwroot}blog/add/$user->guid";
+			$url = "{$CONFIG->wwwroot}informe/add/$user->guid";
 			break;
 		case "owner":
-			$url = "{$CONFIG->wwwroot}blog/owner/{$page[0]}";
+			$url = "{$CONFIG->wwwroot}informe/owner/{$page[0]}";
 			break;
 	}
 

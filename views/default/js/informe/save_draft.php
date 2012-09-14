@@ -5,14 +5,14 @@
  * @package Blog
  */
 ?>
-elgg.provide('elgg.blog');
+elgg.provide('elgg.informe');
 
 /*
  * Attempt to save and update the input with the guid.
  */
-elgg.blog.saveDraftCallback = function(data, textStatus, XHR) {
+elgg.informe.saveDraftCallback = function(data, textStatus, XHR) {
 	if (textStatus == 'success' && data.success == true) {
-		var form = $('form[name=blog_post]');
+		var form = $('form[name=informe_post]');
 
 		// update the guid input element for new posts that now have a guid
 		form.find('input[name=guid]').val(data.guid);
@@ -24,19 +24,19 @@ elgg.blog.saveDraftCallback = function(data, textStatus, XHR) {
 		if (mins.length == 1) {
 			mins = '0' + mins;
 		}
-		$(".blog-save-status-time").html(d.toLocaleDateString() + " @ " + d.getHours() + ":" + mins);
+		$(".informe-save-status-time").html(d.toLocaleDateString() + " @ " + d.getHours() + ":" + mins);
 	} else {
-		$(".blog-save-status-time").html(elgg.echo('error'));
+		$(".informe-save-status-time").html(elgg.echo('error'));
 	}
 };
 
-elgg.blog.saveDraft = function() {
+elgg.informe.saveDraft = function() {
 	if (typeof(tinyMCE) != 'undefined') {
 		tinyMCE.triggerSave();
 	}
 
 	// only save on changed content
-	var form = $('form[name=blog_post]');
+	var form = $('form[name=informe_post]');
 	var description = form.find('textarea[name=description]').val();
 	var title = form.find('input[name=title]').val();
 
@@ -44,7 +44,7 @@ elgg.blog.saveDraft = function() {
 		return false;
 	}
 
-	var draftURL = elgg.config.wwwroot + "action/blog/auto_save_revision";
+	var draftURL = elgg.config.wwwroot + "action/informe/auto_save_revision";
 	var postData = form.serializeArray();
 
 	// force draft status
@@ -54,14 +54,14 @@ elgg.blog.saveDraft = function() {
 		}
 	});
 
-	$.post(draftURL, postData, elgg.blog.saveDraftCallback, 'json');
+	$.post(draftURL, postData, elgg.informe.saveDraftCallback, 'json');
 };
 
-elgg.blog.init = function() {
+elgg.informe.init = function() {
 	// get a copy of the body to compare for auto save
-	oldDescription = $('form[name=blog_post]').find('textarea[name=description]').val();
+	oldDescription = $('form[name=informe_post]').find('textarea[name=description]').val();
 	
-	setInterval(elgg.blog.saveDraft, 60000);
+	setInterval(elgg.informe.saveDraft, 60000);
 };
 
-elgg.register_hook_handler('init', 'system', elgg.blog.init);
+elgg.register_hook_handler('init', 'system', elgg.informe.init);

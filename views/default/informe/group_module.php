@@ -1,16 +1,16 @@
 <?php
 /**
- * Group blog module
+ * Group informe module
  */
 
 $group = elgg_get_page_owner_entity();
 
-if ($group->blog_enable == "no") {
+if ($group->informe_enable == "no") {
 	return true;
 }
 
 $all_link = elgg_view('output/url', array(
-	'href' => "blog/group/$group->guid/all",
+	'href' => "informe/group/$group->guid/all",
 	'text' => elgg_echo('link:view:all'),
 	'is_trusted' => true,
 ));
@@ -18,7 +18,7 @@ $all_link = elgg_view('output/url', array(
 elgg_push_context('widgets');
 $options = array(
 	'type' => 'object',
-	'subtype' => 'blog',
+	'subtype' => 'informe',
 	'container_guid' => elgg_get_page_owner_guid(),
 	'metadata_name_value_pairs' => array('name' => 'status', 'value' => 'published'),
 	'limit' => 6,
@@ -29,17 +29,17 @@ $content = elgg_list_entities_from_metadata($options);
 elgg_pop_context();
 
 if (!$content) {
-	$content = '<p>' . elgg_echo('blog:none') . '</p>';
+	$content = '<p>' . elgg_echo('informe:none') . '</p>';
 }
 
 $new_link = elgg_view('output/url', array(
-	'href' => "blog/add/$group->guid",
-	'text' => elgg_echo('blog:write'),
+	'href' => "informe/add/$group->guid",
+	'text' => elgg_echo('informe:write'),
 	'is_trusted' => true,
 ));
 
 echo elgg_view('groups/profile/module', array(
-	'title' => elgg_echo('blog:group'),
+	'title' => elgg_echo('informe:group'),
 	'content' => $content,
 	'all_link' => $all_link,
 	'add_link' => $new_link,

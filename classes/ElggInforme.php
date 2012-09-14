@@ -6,15 +6,16 @@
  * @property string $comments_on Whether commenting is allowed (Off, On)
  * @property string $excerpt     An excerpt of the blog post used when displaying the post
  */
-class ElggBlog extends ElggObject {
+class ElggInforme extends ElggObject {
 
 	/**
-	 * Set subtype to blog.
+	 * Set subtype to informe.
 	 */
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 
-		$this->attributes['subtype'] = "blog";
+		$this->attributes['subtype'] = "informe";
+
 	}
 
 	/**
@@ -35,8 +36,12 @@ class ElggBlog extends ElggObject {
 		if ($this->comments_on == 'Off') {
 			return false;
 		}
-		
+
 		return true;
+	}
+
+	public function getSummary() {
+		return $this->topics . $this->outlook;
 	}
 
 }
