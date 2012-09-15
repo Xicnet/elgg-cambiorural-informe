@@ -116,6 +116,75 @@ function informe_get_page_content_list($container_guid = NULL) {
 }
 
 /**
+ * Get page components to list a group's or all reports.
+ *
+ * @param int $owner_guid The GUID of the page owner or NULL for all informes
+ * @return array
+ */
+function informe_get_page_content_report($container_guid = NULL) {
+
+	$return = array();
+
+	$return['filter_context'] = $container_guid ? 'mine' : 'all';
+
+	$options = array(
+		'type' => 'object',
+		'subtype' => 'informe',
+		'full_view' => FALSE,
+	);
+
+	$loggedin_userid = elgg_get_logged_in_user_guid();
+	if ($container_guid) {
+		// access check for closed groups
+		group_gatekeeper();
+
+		$options['container_guid'] = $container_guid;
+		$container = get_entity($container_guid);
+		if (!$container) {
+
+		}
+		$return['title'] = elgg_echo('informe:title:user_informes', array($container->name));
+
+		$crumbs_title = $container->name;
+		elgg_push_breadcrumb($crumbs_title);
+
+		if ($container_guid == $loggedin_userid) {
+			$return['filter_context'] = 'mine';
+		} else if (elgg_instanceof($container, 'group')) {
+			$return['filter'] = false;
+		} else {
+			// do not show button or select a tab when viewing someone else's posts
+			$return['filter_context'] = 'none';
+		}
+	} else {
+		$return['filter_context'] = 'all';
+		$return['title'] = elgg_echo('informe:title:all_informes');
+		elgg_pop_breadcrumb();
+		elgg_push_breadcrumb(elgg_echo('informe:reports'));
+	}
+
+	elgg_register_title_button();
+
+	// show all posts for admin or users looking at their own informes
+	// show only published posts for other users.
+	if (!(elgg_is_admin_logged_in() || (elgg_is_logged_in() && $container_guid == $loggedin_userid))) {
+		$options['metadata_name_value_pairs'] = array(
+			array('name' => 'status', 'value' => 'published'),
+		);
+	}
+
+	$list = elgg_list_entities_from_metadata($options);
+	if (!$list) {
+		$return['content'] = elgg_echo('informe:none');
+	} else {
+		$return['content'] = $list;
+	}
+
+	return $return;
+
+}
+
+/**
  * Get page components to list of the user's friends' posts.
  *
  * @param int $user_guid

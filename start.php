@@ -64,6 +64,15 @@ function informe_init() {
 	// add a informe widget
 	elgg_register_widget_type('informe', elgg_echo('informe'), elgg_echo('informe:widget:description'));
 
+	// Add admin menu item
+	elgg_register_admin_menu_item('administer', 'informer', 'statistics');
+
+	elgg_register_widget_type(
+			'group_reports',
+			elgg_echo('informer:widget:group_report'),
+			elgg_echo('informer:widget:group_report:description'),
+			'admin');
+
 	// register actions
 	$action_path = elgg_get_plugins_path() . 'informe/actions/informe';
 	elgg_register_action('informe/save', "$action_path/save.php");
@@ -144,6 +153,9 @@ function informe_page_handler($page) {
 			} else {
 				$params = informe_get_page_content_archive($page[1], $page[3], $page[4]);
 			}
+			break;
+		case 'report':
+			$params = informe_get_page_content_report($page[1], $page[2]);
 			break;
 		case 'all':
 			$params = informe_get_page_content_list();
