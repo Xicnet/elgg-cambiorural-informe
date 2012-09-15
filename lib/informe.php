@@ -411,9 +411,11 @@ function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 	// input names => defaults
 	$values = array(
 		'title' => NULL,
-		'topics' => NULL,
 		'building' => NULL,
 		'meeting_place' => NULL,
+		'meeting_assistance' => NULL,
+		'topics' => NULL,
+		'news' => NULL,
 		'description' => NULL,
 		'status' => 'published',
 		'access_id' => ACCESS_DEFAULT,

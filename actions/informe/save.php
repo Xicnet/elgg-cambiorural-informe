@@ -43,9 +43,13 @@ $old_status = $informe->status;
 // set defaults and required values.
 $values = array(
 	'title' => '',
-	'topics' => '',
+	'meeting_ap' => '',
+	'meeting_pa' => '',
 	'building' => '',
 	'meeting_place' => '',
+	'meeting_assistance' => '',
+	'topics' => '',
+	'news' => '',
 	'description' => '',
 	'status' => 'draft',
 	'access_id' => ACCESS_DEFAULT,
@@ -73,6 +77,10 @@ foreach ($values as $name => $default) {
 	switch ($name) {
 		case 'building':
 		case 'meeting_place':
+		case 'meeting_assistance':
+		case 'pa_guid':
+		case 'ap_guid':
+		case 'news':
 		case 'topics':
 			if ($value) {
 				$values[$name] = $value;
