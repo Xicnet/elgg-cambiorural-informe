@@ -73,7 +73,28 @@ $values = array(
 // fail if a required entity isn't set
 $required = array('');
 if(get_input('status') == 'published') {
-	$required = array('title', 'description', 'topics', 'building', 'meeting_place');
+	$required = array(
+		'title' => '',
+		'informe_period_m',
+		'informe_period_y',
+		'meeting_pa',
+		'meeting_ap',
+		'meeting_manager',
+		'meeting_date',
+		'building',
+		'meeting_place',
+		'meeting_assistance',
+		'topics',
+		'news',
+		'requirements',
+		'rating',
+		'pros',
+		'cons',
+		'meeting_comments',
+		'productiv',
+		'other_comments',
+		'description'
+	);
 }
 
 // load from POST and do sanity and access checking
