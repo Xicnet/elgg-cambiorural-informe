@@ -412,6 +412,8 @@ function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 	$values = array(
 		'title' => NULL,
 		'building' => NULL,
+		'meeting_manager' => NULL,
+		'meeting_date' => NULL,
 		'meeting_place' => NULL,
 		'meeting_assistance' => NULL,
 		'topics' => NULL,

@@ -45,7 +45,9 @@ $values = array(
 	'title' => '',
 	'meeting_ap' => '',
 	'meeting_pa' => '',
+	'meeting_manager' => '',
 	'building' => '',
+	'meeting_date' => '',
 	'meeting_place' => '',
 	'meeting_assistance' => '',
 	'topics' => '',
@@ -82,7 +84,9 @@ foreach ($values as $name => $default) {
 	}
 
 	switch ($name) {
+		case 'meeting_manager':
 		case 'building':
+		case 'meeting_date':
 		case 'meeting_place':
 		case 'meeting_assistance':
 		case 'pa_guid':

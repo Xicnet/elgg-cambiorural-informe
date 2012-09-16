@@ -49,6 +49,9 @@ $title_input = elgg_view('input/text', array(
 	'value' => $vars['title']
 ));
 
+
+$months = array('1' => 'Enero', '2' => 'Febrero', '3' => 'Marzo', '4' => 'Abril', '5' => 'Mayo', '6' => 'Junio', '7' => 'Julio', '8' => 'Agosto', '9' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre');
+
 $topics_label = elgg_echo('Temas tratados');
 $topics_input = elgg_view('input/text', array(
 	'name' => 'topics',
@@ -97,7 +100,7 @@ $meeting_comments_label = elgg_echo('Comentarios');
 $meeting_comments_input = elgg_view('input/text', array(
 	'name' => 'meeting_comments',
 	'id' => 'informe_meeting_comments',
-	'value' => $vars['requirements']
+	'value' => $vars['meeting_comments']
 ));
 
 $productiv_label = elgg_echo('Evaluación de la situación productiva zonal');
@@ -112,6 +115,20 @@ $other_comments_input = elgg_view('input/text', array(
 	'name' => 'other_comments',
 	'id' => 'informe_other_comments',
 	'value' => $vars['other_comments']
+));
+
+$days = array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30', '31' => '31', );
+
+$years  = array('2011' => '2011', '2012' => '2012');
+
+$group_responsible_label = elgg_echo('Nombre del representante');
+$group_responsible_input = elgg_view('input/text', Array('name' => 'meeting_manager'));
+
+$meeting_date_label = elgg_echo('Fecha');
+$meeting_date_input = elgg_view('input/date', array(
+	'name' => 'meeting_date',
+	'id' => 'meeting_date',
+	'value' => $vars['meeting_date']
 ));
 
 $building_label = elgg_echo('Establecimiento');
@@ -221,7 +238,7 @@ if (!elgg_instanceof($group, 'group')) {
 	));
 } else {
 	$informe_period_label = elgg_echo('Período');
-	$informe_period_m_input = elgg_view('input/dropdown', array('name' => 'informe_period_m', 'value' => date("n"), 'options_values' => array('1' => 'Enero', '2' => 'Febrero', '3' => 'Marzo', '4' => 'Abril', '5' => 'Mayo', '6' => 'Junio', '7' => 'Julio', '8' => 'Agosto', '9' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre')));
+	$informe_period_m_input = elgg_view('input/dropdown', array('name' => 'informe_period_m', 'value' => date("n"), 'options_values' => $months));
 	$informe_period_y_input  = elgg_view('input/dropdown', array('name' => 'informe_period_y', 'value' => date("Y"), 'options_values' => array('2011' => '2011', '2012' => '2012')));
 
 	$group_label = elgg_echo('group');
@@ -236,9 +253,6 @@ if (!elgg_instanceof($group, 'group')) {
 	$group_ap_label = elgg_echo('Agente de Proyecto');
 	$group_ap_input = elgg_view('output/url', Array('text' => $group_ap->name, 'href' => $group_ap->getURL()));
 	$group_ap_hidden = elgg_view('input/hidden', array('name' => 'meeting_ap', 'value' => $group->ap));
-
-	$group_responsible_label = elgg_echo('Nombre del representante');
-	$group_responsible_input = elgg_view('input/text', Array('name' => 'meeting_manager'));
 
 }
 
@@ -280,6 +294,11 @@ $draft_warning
 
 <div>
 	<label for="informe_building">1. Reunión Mensual</label><br />
+</div>
+
+<div>
+	<label for="informe_meeting_date">$meeting_date_label</label>
+	$meeting_date_input
 </div>
 
 <div>

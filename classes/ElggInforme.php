@@ -59,8 +59,12 @@ class ElggInforme extends ElggObject {
 		$body.= elgg_view('output/longtext', array('value' => $ap->name));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Promotor Asesor</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $pa->name));
+		$body.= elgg_view('output/longtext', array('value' => '<b>Nombre del representate</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $this->meeting_manager));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Establecimiento</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $this->building));
+		$body.= elgg_view('output/longtext', array('value' => '<b>Fecha</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $this->meeting_date));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Lugar</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $this->meeting_place));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Cantidad de asistentes</b>'));
