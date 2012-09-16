@@ -49,28 +49,28 @@ $title_input = elgg_view('input/text', array(
 	'value' => $vars['title']
 ));
 
-$topics_label = elgg_echo('topics');
+$topics_label = elgg_echo('Temas tratados');
 $topics_input = elgg_view('input/text', array(
 	'name' => 'topics',
 	'id' => 'informe_topics',
 	'value' => $vars['topics']
 ));
 
-$news_label = elgg_echo('news');
+$news_label = elgg_echo('Novedades');
 $news_input = elgg_view('input/text', array(
 	'name' => 'news',
 	'id' => 'informe_news',
 	'value' => $vars['news']
 ));
 
-$requirements_label = elgg_echo('requirements');
+$requirements_label = elgg_echo('Inquietudes y requerimientos');
 $requirements_input = elgg_view('input/text', array(
 	'name' => 'requirements',
 	'id' => 'informe_requirements',
 	'value' => $vars['requirements']
 ));
 
-$rating_label = elgg_echo('rating');
+$rating_label = elgg_echo('Evaluación de la reunión');
 $rating_input = elgg_view('input/dropdown', array(
 	'name' => 'rating',
 	'id' => 'informe_rating',
@@ -79,56 +79,56 @@ $rating_input = elgg_view('input/dropdown', array(
 
 ));
 
-$pros_label = elgg_echo('pros');
+$pros_label = elgg_echo('Aspectos positivos');
 $pros_input = elgg_view('input/text', array(
 	'name' => 'pros',
 	'id' => 'informe_pros',
 	'value' => $vars['pros']
 ));
 
-$cons_label = elgg_echo('cons');
+$cons_label = elgg_echo('Aspectos negativos');
 $cons_input = elgg_view('input/text', array(
 	'name' => 'cons',
 	'id' => 'informe_cons',
 	'value' => $vars['cons']
 ));
 
-$meeting_comments_label = elgg_echo('meeting_comments');
+$meeting_comments_label = elgg_echo('Comentarios');
 $meeting_comments_input = elgg_view('input/text', array(
 	'name' => 'meeting_comments',
 	'id' => 'informe_meeting_comments',
 	'value' => $vars['requirements']
 ));
 
-$productiv_label = elgg_echo('productiv');
+$productiv_label = elgg_echo('Evaluación de la situación productiva zonal');
 $productiv_input = elgg_view('input/text', array(
 	'name' => 'productiv',
 	'id' => 'informe_productiv',
 	'value' => $vars['productiv']
 ));
 
-$other_comments_label = elgg_echo('other_comments');
+$other_comments_label = elgg_echo('Otros comentarios');
 $other_comments_input = elgg_view('input/text', array(
 	'name' => 'other_comments',
 	'id' => 'informe_other_comments',
 	'value' => $vars['other_comments']
 ));
 
-$building_label = elgg_echo('building');
+$building_label = elgg_echo('Establecimiento');
 $building_input = elgg_view('input/text', array(
 	'name' => 'building',
 	'id' => 'informe_building',
 	'value' => $vars['building']
 ));
 
-$meeting_place_label = elgg_echo('meeting_place');
+$meeting_place_label = elgg_echo('Lugar');
 $meeting_place_input = elgg_view('input/text', array(
 	'name' => 'meeting_place',
 	'id' => 'informe_meeting_place',
 	'value' => $vars['meeting_place']
 ));
 
-$meeting_assistance_label = elgg_echo('meeting_assistance');
+$meeting_assistance_label = elgg_echo('Cantidad de asistentes');
 $meeting_assistance_input = elgg_view('input/text', array(
 	'name' => 'meeting_assistance',
 	'id' => 'informe_meeting_assistance',
@@ -279,6 +279,10 @@ $draft_warning
 </div>
 
 <div>
+	<label for="informe_building">1. Reunión Mensual</label><br />
+</div>
+
+<div>
 	<label for="informe_building">$building_label</label>
 	$building_input
 </div>
@@ -294,22 +298,22 @@ $draft_warning
 </div>
 
 <div>
-	<label for="informe_topics">$topics_label</label>
+	<label for="informe_topics">1.1 $topics_label</label>
 	$topics_input
 </div>
 
 <div>
-	<label for="informe_news">$news_label</label>
+	<label for="informe_news">1.2 $news_label</label>
 	$news_input
 </div>
 
 <div>
-	<label for="informe_requirements">$requirements_label</label>
+	<label for="informe_requirements">1.3 $requirements_label</label>
 	$requirements_input
 </div>
 
 <div>
-	<label for="informe_rating">$rating_label</label>
+	<label for="informe_rating">1.4 $rating_label</label>
 	$rating_input
 </div>
 
