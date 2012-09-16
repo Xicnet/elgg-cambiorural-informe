@@ -43,7 +43,8 @@ $old_status = $informe->status;
 // set defaults and required values.
 $values = array(
 	'title' => '',
-	'meeting_ap' => '',
+	'informe_period_m' => '',
+	'informe_period_y' => '',
 	'meeting_pa' => '',
 	'meeting_manager' => '',
 	'building' => '',

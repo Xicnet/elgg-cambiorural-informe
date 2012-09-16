@@ -411,6 +411,10 @@ function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 	// input names => defaults
 	$values = array(
 		'title' => NULL,
+		'informe_period_m' => NULL,
+		'informe_period_y' => NULL,
+		'meeting_pa' => NULL,
+		'meeting_ap' => NULL,
 		'building' => NULL,
 		'meeting_manager' => NULL,
 		'meeting_date' => NULL,

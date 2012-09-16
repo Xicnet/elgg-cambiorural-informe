@@ -49,8 +49,13 @@ $title_input = elgg_view('input/text', array(
 	'value' => $vars['title']
 ));
 
-
 $months = array('1' => 'Enero', '2' => 'Febrero', '3' => 'Marzo', '4' => 'Abril', '5' => 'Mayo', '6' => 'Junio', '7' => 'Julio', '8' => 'Agosto', '9' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre');
+
+$informe_period_label = elgg_echo('Período');
+$informe_period_m_value = $vars['informe_period_m'] ? $vars['informe_period_m'] : date('n');
+$informe_period_m_input = elgg_view('input/dropdown', array('name' => 'informe_period_m', 'value' => $informe_period_m_value, 'options_values' => $months));
+$informe_period_y_value = $vars['informe_period_y'] ? $vars['informe_period_y'] : date('Y');
+$informe_period_y_input  = elgg_view('input/dropdown', array('name' => 'informe_period_y', 'value' => $informe_period_y_value, 'options_values' => array('2011' => '2011', '2012' => '2012')));
 
 $topics_label = elgg_echo('Temas tratados');
 $topics_input = elgg_view('input/text', array(
@@ -122,7 +127,11 @@ $days = array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' =>
 $years  = array('2011' => '2011', '2012' => '2012');
 
 $group_responsible_label = elgg_echo('Nombre del representante');
-$group_responsible_input = elgg_view('input/text', Array('name' => 'meeting_manager'));
+$group_responsible_input = elgg_view('input/text', array(
+	'name' => 'meeting_manager',
+	'id' => 'meeting_manager',
+	'value' => $vars['meeting_manager']
+));
 
 $meeting_date_label = elgg_echo('Fecha');
 $meeting_date_input = elgg_view('input/date', array(
@@ -237,10 +246,6 @@ if (!elgg_instanceof($group, 'group')) {
 		'options_values' => $group_options,
 	));
 } else {
-	$informe_period_label = elgg_echo('Período');
-	$informe_period_m_input = elgg_view('input/dropdown', array('name' => 'informe_period_m', 'value' => date("n"), 'options_values' => $months));
-	$informe_period_y_input  = elgg_view('input/dropdown', array('name' => 'informe_period_y', 'value' => date("Y"), 'options_values' => array('2011' => '2011', '2012' => '2012')));
-
 	$group_label = elgg_echo('group');
 	$group_input = elgg_view('output/url', Array('text' => $group->name, 'href' => $group->getURL()));
 
