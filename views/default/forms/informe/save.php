@@ -328,18 +328,18 @@ $draft_warning
 </div>
 
 <div>
-	<label for="informe_productiv">$productiv_label</label>
+	<label for="informe_meeting_comments">$meeting_comments_label</label>
+	$meeting_comments_input
+</div>
+
+<div>
+	<label for="informe_productiv">3. $productiv_label</label>
 	$productiv_input
 </div>
 
 <div>
-	<label for="informe_other_comments">$other_comments_label</label>
+	<label for="informe_other_comments">4. $other_comments_label</label>
 	$other_comments_input
-</div>
-
-<div>
-	<label for="informe_meeting_comments">$meeting_comments_label</label>
-	$meeting_comments_input
 </div>
 
 <div>
