@@ -55,6 +55,8 @@ $values = array(
 	'pros' => '',
 	'cons' => '',
 	'meeting_comments' => '',
+	'productiv' => '',
+	'other_comments' => '',
 	'description' => '',
 	'status' => 'draft',
 	'access_id' => ACCESS_DEFAULT,
@@ -91,6 +93,8 @@ foreach ($values as $name => $default) {
 		case 'pros':
 		case 'cons':
 		case 'meeting_comments':
+		case 'productiv':
+		case 'other_comments':
 		case 'topics':
 			if ($value) {
 				$values[$name] = $value;

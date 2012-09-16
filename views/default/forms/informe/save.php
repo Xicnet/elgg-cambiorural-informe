@@ -100,6 +100,20 @@ $meeting_comments_input = elgg_view('input/text', array(
 	'value' => $vars['requirements']
 ));
 
+$productiv_label = elgg_echo('productiv');
+$productiv_input = elgg_view('input/text', array(
+	'name' => 'productiv',
+	'id' => 'informe_productiv',
+	'value' => $vars['productiv']
+));
+
+$other_comments_label = elgg_echo('other_comments');
+$other_comments_input = elgg_view('input/text', array(
+	'name' => 'other_comments',
+	'id' => 'informe_other_comments',
+	'value' => $vars['other_comments']
+));
+
 $building_label = elgg_echo('building');
 $building_input = elgg_view('input/text', array(
 	'name' => 'building',
@@ -307,6 +321,16 @@ $draft_warning
 <div>
 	<label for="informe_cons">$cons_label</label>
 	$cons_input
+</div>
+
+<div>
+	<label for="informe_productiv">$productiv_label</label>
+	$productiv_input
+</div>
+
+<div>
+	<label for="informe_other_comments">$other_comments_label</label>
+	$other_comments_input
 </div>
 
 <div>

@@ -79,6 +79,10 @@ class ElggInforme extends ElggObject {
 		$body.= elgg_view('output/longtext', array('value' => $this->cons));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Comentarios</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $this->meeting_comments));
+		$body.= elgg_view('output/longtext', array('value' => '<b>Evaluación de la situación productiva zonal</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $this->productiv));
+		$body.= elgg_view('output/longtext', array('value' => '<b>Otros comentarios</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $this->other_comments));
 		$body.='<p></p>';
 
 		// Sections

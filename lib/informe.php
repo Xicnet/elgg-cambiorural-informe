@@ -421,6 +421,8 @@ function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 		'pros' => NULL,
 		'cons' => NULL,
 		'meeting_comments' => NULL,
+		'productiv' => NULL,
+		'other_comments' => NULL,
 		'description' => NULL,
 		'status' => 'published',
 		'access_id' => ACCESS_DEFAULT,
