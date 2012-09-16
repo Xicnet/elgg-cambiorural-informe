@@ -69,6 +69,17 @@ class ElggInforme extends ElggObject {
 		$body.= elgg_view('output/longtext', array('value' => $this->topics));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Novedades</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $this->news));
+		$body.= elgg_view('output/longtext', array('value' => '<b>Inquietudes y requerimientos</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $this->requirements));
+		$body.= elgg_view('output/longtext', array('value' => '<b>Evaluación de la reunión</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $this->rating));
+		$body.= elgg_view('output/longtext', array('value' => '<b>Aspectos positivos</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $this->pros));
+		$body.= elgg_view('output/longtext', array('value' => '<b>Aspectos negativos</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $this->cons));
+		$body.= elgg_view('output/longtext', array('value' => '<b>Comentarios</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $this->meeting_comments));
+		$body.='<p></p>';
 
 		// Sections
 

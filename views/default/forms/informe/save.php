@@ -63,6 +63,43 @@ $news_input = elgg_view('input/text', array(
 	'value' => $vars['news']
 ));
 
+$requirements_label = elgg_echo('requirements');
+$requirements_input = elgg_view('input/text', array(
+	'name' => 'requirements',
+	'id' => 'informe_requirements',
+	'value' => $vars['requirements']
+));
+
+$rating_label = elgg_echo('rating');
+$rating_input = elgg_view('input/dropdown', array(
+	'name' => 'rating',
+	'id' => 'informe_rating',
+	'value' => $vars['rating'],
+	'options_values' => array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10')
+
+));
+
+$pros_label = elgg_echo('pros');
+$pros_input = elgg_view('input/text', array(
+	'name' => 'pros',
+	'id' => 'informe_pros',
+	'value' => $vars['pros']
+));
+
+$cons_label = elgg_echo('cons');
+$cons_input = elgg_view('input/text', array(
+	'name' => 'cons',
+	'id' => 'informe_cons',
+	'value' => $vars['cons']
+));
+
+$meeting_comments_label = elgg_echo('meeting_comments');
+$meeting_comments_input = elgg_view('input/text', array(
+	'name' => 'meeting_comments',
+	'id' => 'informe_meeting_comments',
+	'value' => $vars['requirements']
+));
+
 $building_label = elgg_echo('building');
 $building_input = elgg_view('input/text', array(
 	'name' => 'building',
@@ -250,6 +287,31 @@ $draft_warning
 <div>
 	<label for="informe_news">$news_label</label>
 	$news_input
+</div>
+
+<div>
+	<label for="informe_requirements">$requirements_label</label>
+	$requirements_input
+</div>
+
+<div>
+	<label for="informe_rating">$rating_label</label>
+	$rating_input
+</div>
+
+<div>
+	<label for="informe_pros">$pros_label</label>
+	$pros_input
+</div>
+
+<div>
+	<label for="informe_cons">$cons_label</label>
+	$cons_input
+</div>
+
+<div>
+	<label for="informe_meeting_comments">$meeting_comments_label</label>
+	$meeting_comments_input
 </div>
 
 <div>

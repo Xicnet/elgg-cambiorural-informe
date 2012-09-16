@@ -50,6 +50,11 @@ $values = array(
 	'meeting_assistance' => '',
 	'topics' => '',
 	'news' => '',
+	'requirements' => '',
+	'rating' => '',
+	'pros' => '',
+	'cons' => '',
+	'meeting_comments' => '',
 	'description' => '',
 	'status' => 'draft',
 	'access_id' => ACCESS_DEFAULT,
@@ -81,6 +86,11 @@ foreach ($values as $name => $default) {
 		case 'pa_guid':
 		case 'ap_guid':
 		case 'news':
+		case 'requirements':
+		case 'rating':
+		case 'pros':
+		case 'cons':
+		case 'meeting_comments':
 		case 'topics':
 			if ($value) {
 				$values[$name] = $value;
