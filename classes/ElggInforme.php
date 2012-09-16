@@ -53,8 +53,11 @@ class ElggInforme extends ElggObject {
 		$body = "";
 
 		// Read-only fields
+		$group = get_entity($this->container_guid);
 		$ap = get_entity($this->meeting_ap);
 		$pa = get_entity($this->meeting_pa);
+		$body.= elgg_view('output/longtext', array('value' => '<b>Grupo</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $group->name));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Agente de Proyecto</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $ap->name));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Promotor Asesor</b>'));

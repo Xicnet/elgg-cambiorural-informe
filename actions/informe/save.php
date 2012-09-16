@@ -46,6 +46,7 @@ $values = array(
 	'informe_period_m' => '',
 	'informe_period_y' => '',
 	'meeting_pa' => '',
+	'meeting_ap' => '',
 	'meeting_manager' => '',
 	'building' => '',
 	'meeting_date' => '',
@@ -70,7 +71,10 @@ $values = array(
 );
 
 // fail if a required entity isn't set
-$required = array('title', 'description', 'topics', 'building', 'meeting_place');
+$required = array('');
+if(get_input('status') == 'published') {
+	$required = array('title', 'description', 'topics', 'building', 'meeting_place');
+}
 
 // load from POST and do sanity and access checking
 foreach ($values as $name => $default) {

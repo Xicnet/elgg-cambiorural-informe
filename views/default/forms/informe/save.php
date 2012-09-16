@@ -42,13 +42,6 @@ $save_button = elgg_view('input/submit', array(
 ));
 $action_buttons = $save_button . $preview_button . $delete_link;
 
-$title_label = elgg_echo('title');
-$title_input = elgg_view('input/text', array(
-	'name' => 'title',
-	'id' => 'informe_title',
-	'value' => $vars['title']
-));
-
 $months = array('1' => 'Enero', '2' => 'Febrero', '3' => 'Marzo', '4' => 'Abril', '5' => 'Mayo', '6' => 'Junio', '7' => 'Julio', '8' => 'Agosto', '9' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre');
 
 $informe_period_label = elgg_echo('Período');
@@ -248,6 +241,7 @@ if (!elgg_instanceof($group, 'group')) {
 } else {
 	$group_label = elgg_echo('group');
 	$group_input = elgg_view('output/url', Array('text' => $group->name, 'href' => $group->getURL()));
+	$group_input_hidden = elgg_view('input/hidden', Array('name' => 'container_guid', 'value' => $group->guid));
 
 	$group_pa = get_entity($group->pa);
 	$group_pa_label = elgg_echo('Promotor Asesor');
@@ -261,6 +255,15 @@ if (!elgg_instanceof($group, 'group')) {
 
 }
 
+setlocale(LC_TIME, 'es_AR');
+$report_month = date('F Y', strtotime("{$vars['informe_period_y']}-{$vars['informe_period_m']}"));
+
+$title_input = elgg_view('input/hidden', array(
+	'name' => 'title',
+	'id' => 'informe_title',
+	'value' => "Informe del grupo ".$group->name." ($report_month)"
+));
+
 echo <<<___HTML
 
 $draft_warning
@@ -273,6 +276,7 @@ $draft_warning
 <div>
 	<label for="informe_container_guid">$group_label</label>
 	$group_input
+	$group_input_hidden
 </div>
 
 <div>
@@ -293,7 +297,6 @@ $draft_warning
 </div>
 
 <div>
-	<label for="informe_title">$title_label</label>
 	$title_input
 </div>
 
