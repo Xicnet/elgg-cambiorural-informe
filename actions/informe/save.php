@@ -41,8 +41,15 @@ if ($guid) {
 $old_status = $informe->status;
 
 // set defaults and required values.
+
+// group this report belongs to
+$container_guid = (int)get_input('container_guid');
+$group = get_entity($container_guid);
+
+// period for this report
+$report_month = date('F Y', strtotime(get_input('informe_period_y')."-".get_input('informe_period_m')));
 $values = array(
-	'title' => '',
+	'title' => "Informe del grupo ".$group->name." ($report_month)",
 	'informe_period_m' => '',
 	'informe_period_y' => '',
 	'meeting_pa' => '',

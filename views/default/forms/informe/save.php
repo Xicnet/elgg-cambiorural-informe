@@ -255,15 +255,6 @@ if (!elgg_instanceof($group, 'group')) {
 
 }
 
-setlocale(LC_TIME, 'es_AR');
-$report_month = date('F Y', strtotime("{$vars['informe_period_y']}-{$vars['informe_period_m']}"));
-
-$title_input = elgg_view('input/hidden', array(
-	'name' => 'title',
-	'id' => 'informe_title',
-	'value' => "Informe del grupo ".$group->name." ($report_month)"
-));
-
 echo <<<___HTML
 
 $draft_warning
@@ -294,10 +285,6 @@ $draft_warning
 <div>
 	<label for="informe_group_responsible_label">$group_responsible_label</label>
 	$group_responsible_input
-</div>
-
-<div>
-	$title_input
 </div>
 
 <div>
