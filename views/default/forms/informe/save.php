@@ -259,6 +259,30 @@ echo <<<___HTML
 
 $draft_warning
 
+<style>
+.input-textarea {
+        height: 50px;
+}
+label{
+}
+._activity{
+
+}
+._h{
+        display:none;
+}
+._block{
+        padding:15px;
+        margin-left:25px;
+        background-color: rgba(20%, 20%, 20%, 0.1);
+}
+
+h1{
+        font-size:20px;
+}
+</style>
+
+
 <div>
 	<label for="informe_period">$informe_period_label</label>
 	$informe_period_m_input / $informe_period_y_input
@@ -291,59 +315,78 @@ $draft_warning
 	<label for="informe_building">1. Reunión Mensual</label><br />
 </div>
 
-<div>
-	<label for="informe_meeting_date">$meeting_date_label</label>
-	$meeting_date_input
-</div>
+<div class='_block'>
+	<div>
+		<label for="informe_meeting_date">$meeting_date_label</label>
+		$meeting_date_input
+	</div>
+	<div>
+		<label for="informe_building">$building_label</label>
+		$building_input
+	</div>
+	<div>
+		<label for="informe_meeting_place">$meeting_place_label</label>
+		$meeting_place_input
+	</div>
+	<div>
+		<label for="informe_meeting_assistance">$meeting_assistance_label</label>
+		$meeting_assistance_input
+	</div>
 
-<div>
-	<label for="informe_building">$building_label</label>
-	$building_input
-</div>
+	<br />
+	<div class='_block'>
+		<div>
+			<label for="informe_topics">1.1. $topics_label</label>
+			$topics_input
+		</div>
+	</div>
 
-<div>
-	<label for="informe_meeting_place">$meeting_place_label</label>
-	$meeting_place_input
-</div>
+	<div class='_block'>
+		<div>
+			<label for="informe_news">1.2. $news_label</label>
+			$news_input
+		</div>
+	</div>
 
-<div>
-	<label for="informe_meeting_assistance">$meeting_assistance_label</label>
-	$meeting_assistance_input
-</div>
+	<div class='_block'>
+		<div>
+			<label for="informe_requirements">1.3. $requirements_label</label>
+			$requirements_input
+		</div>
+	</div>
 
-<div>
-	<label for="informe_topics">1.1 $topics_label</label>
-	$topics_input
-</div>
+	<div class='_block'>
+		<div>
+			<label for="informe_rating">1.4. $rating_label</label>
+		</div>
+		<div class='_block'>
+			<div>
+				<label>Califique la reunión (1 ~ 10):</label><br />
+				$rating_input
+			</div>
+		</div>
 
-<div>
-	<label for="informe_news">1.2 $news_label</label>
-	$news_input
-</div>
+		<div class='_block'>
+			<div>
+				<label for="informe_pros">$pros_label</label>
+				$pros_input
+			</div>
+		</div>
 
-<div>
-	<label for="informe_requirements">1.3 $requirements_label</label>
-	$requirements_input
-</div>
+		<div class='_block'>
+			<div>
+				<label for="informe_cons">$cons_label</label>
+				$cons_input
+			</div>
+		</div>
 
-<div>
-	<label for="informe_rating">1.4 $rating_label</label>
-	$rating_input
-</div>
-
-<div>
-	<label for="informe_pros">$pros_label</label>
-	$pros_input
-</div>
-
-<div>
-	<label for="informe_cons">$cons_label</label>
-	$cons_input
-</div>
-
-<div>
-	<label for="informe_meeting_comments">$meeting_comments_label</label>
-	$meeting_comments_input
+		<div class='_block'>
+			<div>
+				<label for="informe_meeting_comments">$meeting_comments_label</label>
+				$meeting_comments_input
+			</div>
+		</div>
+	</div>
 </div>
 
 <div>

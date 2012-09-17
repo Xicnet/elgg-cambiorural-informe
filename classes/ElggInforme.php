@@ -56,6 +56,10 @@ class ElggInforme extends ElggObject {
 		$group = get_entity($this->container_guid);
 		$ap = get_entity($this->meeting_ap);
 		$pa = get_entity($this->meeting_pa);
+		$report_month = date('F Y', strtotime($this->informe_period_y."-".$this->informe_period_m));
+
+		$body.= elgg_view('output/longtext', array('value' => '<b>Período</b>'));
+		$body.= elgg_view('output/longtext', array('value' => $report_month));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Grupo</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $group->name));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Agente de Proyecto</b>'));
