@@ -430,7 +430,7 @@ function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 		'productiv' => NULL,
 		'other_comments' => NULL,
 		'description' => NULL,
-		'status' => 'published',
+		'status' => 'draft',
 		'access_id' => ACCESS_DEFAULT,
 		'comments_on' => 'On',
 		'excerpt' => NULL,
