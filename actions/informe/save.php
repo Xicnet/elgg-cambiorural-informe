@@ -47,7 +47,7 @@ $container_guid = (int)get_input('container_guid');
 $group = get_entity($container_guid);
 
 // period for this report
-$report_month = date('F Y', strtotime(get_input('informe_period_y')."-".get_input('informe_period_m')));
+$report_month = strftime('%F %Y', strtotime(get_input('informe_period_y')."-".get_input('informe_period_m')));
 $values = array(
 	'title' => "Informe del grupo ".$group->name." ($report_month)",
 	'informe_period_m' => '',
@@ -78,7 +78,7 @@ $values = array(
 );
 
 // fail if a required entity isn't set
-$required = array('');
+$required = array();
 if(get_input('status') == 'published') {
 	$required = array(
 		'title' => '',
