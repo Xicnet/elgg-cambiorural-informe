@@ -108,6 +108,9 @@ $productiv_input = elgg_view('input/text', array(
 	'value' => $vars['productiv']
 ));
 
+$activities_label = elgg_echo('Otras actividades desarrolladas durante el mes');
+$activities_input = elgg_view('input/activities');
+
 $other_comments_label = elgg_echo('Otros comentarios');
 $other_comments_input = elgg_view('input/text', array(
 	'name' => 'other_comments',
@@ -260,7 +263,7 @@ echo <<<___HTML
 $draft_warning
 
 <style>
-.input-textarea {
+.elgg-input-longtext {
         height: 50px;
 }
 label{
@@ -390,8 +393,14 @@ h1{
 </div>
 
 <div>
-	<label for="informe_productiv">3. $productiv_label</label>
+	<label for="informe_productiv">2. $productiv_label</label>
 	$productiv_input
+</div>
+
+<div>
+	<label for="informe_activities">3. $activities_label</label>
+	$activities_input
+	<a href="#">Agregar</a>
 </div>
 
 <div>
