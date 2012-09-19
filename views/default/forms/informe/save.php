@@ -285,6 +285,12 @@ h1{
 }
 </style>
 
+<script language="javascript">
+function add_activity() {
+	$("#activities-block").clone().appendTo('#activities-block-container');
+	return false;
+}
+</script>
 
 <div>
 	<label for="informe_period">$informe_period_label</label>
@@ -399,8 +405,12 @@ h1{
 
 <div>
 	<label for="informe_activities">3. $activities_label</label>
-	$activities_input
-	<a href="#">Agregar</a>
+	<div id="activities-block-container">
+		<div id="activities-block">
+		$activities_input
+		</div>
+	</div>
+	<a href="#" onclick="add_activity(); return false;">Agregar</a>
 </div>
 
 <div>
