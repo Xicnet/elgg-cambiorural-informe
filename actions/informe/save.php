@@ -19,6 +19,18 @@ $user = elgg_get_logged_in_user_entity();
 // edit or create a new entity
 $guid = get_input('guid');
 
+for($i=1 ; $i < 6 ; $i++) {
+	$activitylabel = get_input('activitylabel_'.$i);
+	$activitydate = get_input('activitydate_'.$i);
+	$activitytype = get_input('activitytype_'.$i);
+	$activitycomment = get_input('activitycomment_'.$i);
+	error_log("XXX " . $activitylabel);
+	error_log("XXX " . $activitydate);
+	error_log("XXX " . $activitytype);
+	error_log("XXX " . $activitycomment);
+}
+//error_log("XXX " . var_dump($_REQUEST));
+
 if ($guid) {
 	$entity = get_entity($guid);
 	if (elgg_instanceof($entity, 'object', 'informe') && $entity->canEdit()) {
@@ -133,6 +145,8 @@ foreach ($values as $name => $default) {
 		case 'productiv':
 		case 'other_comments':
 		case 'topics':
+                case 'meeting_pa':
+                case 'meeting_ap':
 			if ($value) {
 				$values[$name] = $value;
 			} else {

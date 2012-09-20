@@ -287,7 +287,16 @@ h1{
 
 <script language="javascript">
 function add_activity() {
-	$("#activities-block").clone().appendTo('#activities-block-container');
+	$(".activities-block").clone().appendTo('#activities-block-container');
+	var i = 1;
+	$(".activities-block").each(function() {
+		var acti_input = $(this).find('input, textarea');
+		acti_input.each(function() {
+			input_name = $(this).attr('name').split('_')[0];
+			$(this).attr('name', input_name + '_' + i);
+		});
+		i++;
+	});
 	return false;
 }
 </script>
@@ -406,7 +415,7 @@ function add_activity() {
 <div>
 	<label for="informe_activities">3. $activities_label</label>
 	<div id="activities-block-container">
-		<div id="activities-block">
+		<div class="activities-block">
 		$activities_input
 		</div>
 	</div>

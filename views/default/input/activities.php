@@ -1,18 +1,22 @@
 <?php
-$activity_label =  elgg_view('input/text', array('name' => 'activity_label'));
+$activity_label =  elgg_view('input/text', array(
+				'name' => 'activitylabel_1'
+));
 $activity_date = elgg_view('input/date', array(
-        'name' => 'activity_date',
-        'id' => 'activity_date',
+        'name' => 'activitydate_1',
         'value' => $vars['activity_date']
 ));
 
 $activity_type = elgg_view(
-			'input/radio', array('name' => 'activity_type',
+			'input/radio', array(
+				'name' => 'activitytype_1',
 			'options' => array(
 				'Individual' => '1',
 				'Grupal' => '2'
 )));
-$activity_comment = elgg_view('input/longtext', array('name' => 'activity_comment'));
+$activity_comment = elgg_view('input/longtext', array(
+						'name' => 'activitycomment_1'
+));
 
 echo <<<___HTML
 
