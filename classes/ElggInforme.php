@@ -14,8 +14,9 @@ class ElggInforme extends ElggObject {
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 
-		$this->attributes['subtype'] = "informe";
-
+		$this->attributes['subtype']  = "informe";
+		$this->attributes['reviewed'] = FALSE;
+		$this->attributes['due_time'] = NULL;
 	}
 
 	/**
@@ -56,7 +57,6 @@ class ElggInforme extends ElggObject {
 	public function getSummary() {
 		return $this->topics . $this->outlook;
 	}
-
 
 	public function getBody() {
 		// Compose body from report fields
@@ -111,7 +111,7 @@ class ElggInforme extends ElggObject {
 
 		// Sections
 
-		// 
+		//
 
 		$body.= $this->description;
 
