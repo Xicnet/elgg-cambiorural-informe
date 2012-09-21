@@ -19,16 +19,20 @@ $user = elgg_get_logged_in_user_entity();
 // edit or create a new entity
 $guid = get_input('guid');
 
-for($i=1 ; $i < 6 ; $i++) {
-	$activitylabel = get_input('activitylabel_'.$i);
-	$activitydate = get_input('activitydate_'.$i);
-	$activitytype = get_input('activitytype_'.$i);
-	$activitycomment = get_input('activitycomment_'.$i);
-	error_log("XXX " . $activitylabel);
-	error_log("XXX " . $activitydate);
-	error_log("XXX " . $activitytype);
-	error_log("XXX " . $activitycomment);
-}
+//for($i=1 ; $i < 6 ; $i++) {
+	//$activitylabel = get_input('activitylabel_'.$i);
+	//$activitydate = get_input('activitydate_'.$i);
+	//$activitytype = get_input('activitytype_'.$i);
+	//$activitycomment = get_input('activitycomment');
+	$activitylabel = get_input('activitylabel');
+	$activitydate = get_input('activitydate');
+	$activitytype = get_input('activitytype');
+	$activitycomment = get_input('activitycomment');
+	error_log("activity title: " . implode($activitylabel));
+	error_log("activity date: " . implode($activitydate));
+	error_log("activity type: " . implode($activitytype));
+	error_log("activity comment: " . implode($activitycomment));
+//}
 //error_log("XXX " . var_dump($_REQUEST));
 
 if ($guid) {

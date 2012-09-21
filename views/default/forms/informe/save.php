@@ -288,6 +288,7 @@ h1{
 <script language="javascript">
 function add_activity() {
 	$(".activities-block").clone().appendTo('#activities-block-container');
+	/*
 	var i = 1;
 	$(".activities-block").each(function() {
 		var acti_input = $(this).find('input, textarea');
@@ -297,6 +298,7 @@ function add_activity() {
 		});
 		i++;
 	});
+	*/
 	return false;
 }
 </script>
