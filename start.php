@@ -30,6 +30,9 @@ function informe_init() {
 	// add to the main css
 	elgg_extend_view('css/elgg', 'informe/css');
 
+	// Extend groups profile
+	elgg_extend_view('groups/profile/fields', 'informe/group_fields');
+
 	// register the informe's JavaScript
 	$informe_js = elgg_get_simplecache_url('js', 'informe/save_draft');
 	elgg_register_simplecache_view('js/informe/save_draft');
