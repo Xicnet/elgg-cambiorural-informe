@@ -15,8 +15,6 @@ class ElggInforme extends ElggObject {
 		parent::initializeAttributes();
 
 		$this->attributes['subtype']  = "informe";
-		$this->attributes['reviewed'] = FALSE;
-		$this->attributes['due_time'] = NULL;
 	}
 
 	/**
@@ -105,6 +103,15 @@ class ElggInforme extends ElggObject {
 		$body.= elgg_view('output/longtext', array('value' => $this->meeting_comments));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Evaluación de la situación productiva zonal</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $this->productiv));
+		$body.= elgg_view('output/longtext', array('value' => '<b>3. Otras actividades desarrolladas durante el mes</b>'));
+		$activities = elgg_get_entities_from_relationship(array('relationship_guid' => $this->getGUID(), 'relationship' => 'report_activity', 'inverse_relationship' => TRUE));
+		if ($activities) {
+			$body.= '<div>';
+			foreach ($activities AS $activity) {
+				$body.= elgg_view('informe/activity', array('entity' => $entity, 'full_view' => FALSE));
+			}
+			$body.= '</div>';
+		}
 		$body.= elgg_view('output/longtext', array('value' => '<b>Otros comentarios</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $this->other_comments));
 		$body.='<p></p>';

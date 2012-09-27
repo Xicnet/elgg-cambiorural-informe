@@ -108,8 +108,9 @@ $productiv_input = elgg_view('input/text', array(
 	'value' => $vars['productiv']
 ));
 
+$activities = elgg_get_entities_from_relationship(array('relationship_guid' => $vars['guid'], 'relationship' => 'report_activity', 'inverse_relationship' => true));
 $activities_label = elgg_echo('Otras actividades desarrolladas durante el mes');
-$activities_input = elgg_view('input/activities');
+$activities_input = elgg_view('input/activities', array('activities' => $activities));
 
 $other_comments_label = elgg_echo('Otros comentarios');
 $other_comments_input = elgg_view('input/text', array(
@@ -258,6 +259,8 @@ if (!elgg_instanceof($group, 'group')) {
 
 }
 
+$due_time = is_null($informe->due_time) ? '' : 'Fecha límite: ' . strftime("%d/%m/%Y", $informe->due_time);
+
 echo <<<___HTML
 
 $draft_warning
@@ -287,18 +290,13 @@ h1{
 
 <script language="javascript">
 function add_activity() {
-	$(".activities-block").clone().appendTo('#activities-block-container');
-	/*
-	var i = 1;
-	$(".activities-block").each(function() {
-		var acti_input = $(this).find('input, textarea');
-		acti_input.each(function() {
-			input_name = $(this).attr('name').split('_')[0];
-			$(this).attr('name', input_name + '_' + i);
-		});
-		i++;
+	var i = $(".activities-block").children().size();
+	var input_parts;
+	var clone = $(".activities-block:first-child").clone();
+	clone.find('input, textarea').each(function() {
+			$(this).attr('name', $(this).attr('name').replace('[0]', '['+ i +']'));
 	});
-	*/
+	clone.appendTo('#activities-block-container');
 	return false;
 }
 </script>
@@ -306,6 +304,7 @@ function add_activity() {
 <div>
 	<label for="informe_period">$informe_period_label</label>
 	$informe_period_m_input / $informe_period_y_input
+	<span>$due_time</span>
 </div>
 
 <div>

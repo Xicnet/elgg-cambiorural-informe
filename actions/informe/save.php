@@ -19,21 +19,18 @@ $user = elgg_get_logged_in_user_entity();
 // edit or create a new entity
 $guid = get_input('guid');
 
-//for($i=1 ; $i < 6 ; $i++) {
-	//$activitylabel = get_input('activitylabel_'.$i);
-	//$activitydate = get_input('activitydate_'.$i);
-	//$activitytype = get_input('activitytype_'.$i);
-	//$activitycomment = get_input('activitycomment');
-	$activitylabel = get_input('activitylabel');
-	$activitydate = get_input('activitydate');
-	$activitytype = get_input('activitytype');
-	$activitycomment = get_input('activitycomment');
-	error_log("activity title: " . implode($activitylabel));
-	error_log("activity date: " . implode($activitydate));
-	error_log("activity type: " . implode($activitytype));
-	error_log("activity comment: " . implode($activitycomment));
-//}
-//error_log("XXX " . var_dump($_REQUEST));
+$activitylabel = get_input('activitylabel');
+$activitydate = get_input('activitydate');
+$activitytype = get_input('activitytype');
+$activitycomment = get_input('activitycomment');
+
+foreach($activitylabel as $act_label) {
+	error_log("activity title: " . $act_label);
+}
+
+//error_log("activity date: " . implode($activitydate));
+//error_log("activity type: " . implode($activitytype));
+//error_log("activity comment: " . implode($activitycomment));
 
 if ($guid) {
 	$entity = get_entity($guid);
@@ -209,11 +206,36 @@ if (!$error) {
 			break;
 		}
 	}
+	if(is_null($informe->due_time)) {
+		//$informe->due_time = strtotime(get_input('informe_period_y').'-'.get_input('informe_period_m') . ' + 1 month + 15 days');
+		$next_month = '';
+		if(date('j') > 16) {
+			$next_month = ' + 1 month';
+		}
+		$informe->due_time = strtotime(get_input('informe_period_y').'-'.get_input('informe_period_m') . ' + 15 days' . $next_month);
+	}
 }
 
 // only try to save base entity if no errors
 if (!$error) {
 	if ($informe->save()) {
+		
+		// save activities
+		foreach($activities as $params) {
+			//error_log("activity title: " . $act_label);
+			$activity = new ElggReportActivity();
+			$activity->title = $params['title'];
+			$activity->date = $params['date'];
+			$activity->type = $params['type'];
+			$activity->notes = $params['notes'];
+			if ($activity->save()) {
+				elgg_add_entity_relationship($informe->guid, 'report_activity', $activity->guid);
+			} else {
+				register_error('informe:error:cannotsaveactivity');
+				forward(REFERER);
+			}
+		}
+
 		// remove sticky form entries
 		elgg_clear_sticky_form('informe');
 
@@ -231,6 +253,7 @@ if (!$error) {
 		system_message(elgg_echo('informe:message:saved'));
 
 		$status = $informe->status;
+
 
 		// add to river if changing status or published, regardless of new post
 		// because we remove it for drafts.
