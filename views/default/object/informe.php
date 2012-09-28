@@ -63,10 +63,7 @@ if (elgg_in_context('widgets')) {
 
 if ($full) {
 
-	$body = elgg_view('output/longtext', array(
-		'value' => $informe->getBody(),
-		'class' => 'informe-post',
-	));
+	$body = '<div class="informe-post">' . $informe->getBody() . '</div>';
 
 	$params = array(
 		'entity' => $informe,

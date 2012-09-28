@@ -15,19 +15,21 @@ if (!$entity) {
 $owner = $entity->getOwnerEntity();
 $container = $entity->getContainerEntity();
 
-$label = $entity->label;
-$date  = strftime('', $entity->activity_date);
+$title = $entity->title;
+$date  = strftime('%A %d %B %Y', strtotime($entity->date));
+$scope = $entity->scope;
+$notes = $entity->notes;
 
-$type = $entity->activity_type;
-$activity_notes = $entity->activity_notes;
+echo <<<___HTML
 
-?>
-<div class="elgg-report-activity" id="report-activity-<?php echo $entity->guid; ?>">
-    <h4><?php echo $label; ?></h4>
+<div class="elgg-report-activity" id="report-activity-{$entity->guid}">
+    <h4>$title</h4>
     <p>
-      <span class="activity-date"><?php echo $date; ?></span>
-      <span class="activity-type"><?php echo $type; ?></span>
-      <span class="activity-notes"><?php echo $activity_notes; ?></span>
+      <span class="activity-date">$date</span>
+      <span class="activity-scope">$scope</span>
+      <span class="activity-notes">$notes</span>
     </p>
 </div>
+
+___HTML;
 

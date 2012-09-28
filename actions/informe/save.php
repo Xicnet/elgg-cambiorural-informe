@@ -19,18 +19,7 @@ $user = elgg_get_logged_in_user_entity();
 // edit or create a new entity
 $guid = get_input('guid');
 
-$activitylabel = get_input('activitylabel');
-$activitydate = get_input('activitydate');
-$activitytype = get_input('activitytype');
-$activitycomment = get_input('activitycomment');
-
-foreach($activitylabel as $act_label) {
-	error_log("activity title: " . $act_label);
-}
-
-//error_log("activity date: " . implode($activitydate));
-//error_log("activity type: " . implode($activitytype));
-//error_log("activity comment: " . implode($activitycomment));
+$activities = get_input('activities');
 
 if ($guid) {
 	$entity = get_entity($guid);
@@ -220,16 +209,17 @@ if (!$error) {
 if (!$error) {
 	if ($informe->save()) {
 		
+			//error_log(print_r($activities, true));
 		// save activities
 		foreach($activities as $params) {
 			//error_log("activity title: " . $act_label);
 			$activity = new ElggReportActivity();
 			$activity->title = $params['title'];
-			$activity->date = $params['date'];
-			$activity->type = $params['type'];
+			$activity->date  = $params['date'];
+			$activity->scope = $params['scope'];
 			$activity->notes = $params['notes'];
 			if ($activity->save()) {
-				elgg_add_entity_relationship($informe->guid, 'report_activity', $activity->guid);
+				add_entity_relationship($informe->getGUID(), 'report_activity', $activity->guid);
 			} else {
 				register_error('informe:error:cannotsaveactivity');
 				forward(REFERER);

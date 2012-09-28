@@ -27,6 +27,14 @@ class ElggReportActivity extends ElggObject {
 	 * @since 1.8.8
 	 */
 	public function canEdit($user_guid = 0) {
-		return (parent::canEdit() && $this->group_pa == $user_guid);
+                error_log("====== canEdit($user_guid) container = {$this->container_guid}");
+		$report = $this->getContainerEntity();
+                error_log("====== canEdit($user_guid) meeting_pa = {$report->meeting_pa}");
+		if (!elgg_instanceof($report, 'object', 'informe')) {
+                error_log("====== canEdit($user_guid) not informe");
+			return FALSE;
+		}
+                error_log("====== canEdit($user_guid) ...");
+		return (parent::canEdit() && $report->meeting_pa == $user_guid);
 	}
 }

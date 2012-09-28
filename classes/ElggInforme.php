@@ -49,11 +49,19 @@ class ElggInforme extends ElggObject {
 	 * @since 1.8.8
 	 */
 	public function canEdit($user_guid = 0) {
-		return (parent::canEdit() && $this->group_pa == $user_guid);
+
+		$user = $user_guid == 0 ? elgg_get_logged_in_user_entity() : get_entity($user_guid);
+		if (!elgg_instanceof($user, 'user')) {
+			return FALSE;
+		}
+		$user_guid = $user->guid;
+
+//		error_log("====== ElggInforme canEdit($user_guid) meeting_pa = {$this->meeting_pa}");
+		return (parent::canEdit() && $this->meeting_pa == $user_guid);
 	}
 
 	public function getSummary() {
-		return $this->topics . $this->outlook;
+		return $this->topics;
 	}
 
 	public function getBody() {
@@ -104,14 +112,7 @@ class ElggInforme extends ElggObject {
 		$body.= elgg_view('output/longtext', array('value' => '<b>Evaluación de la situación productiva zonal</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $this->productiv));
 		$body.= elgg_view('output/longtext', array('value' => '<b>3. Otras actividades desarrolladas durante el mes</b>'));
-		$activities = elgg_get_entities_from_relationship(array('relationship_guid' => $this->getGUID(), 'relationship' => 'report_activity', 'inverse_relationship' => TRUE));
-		if ($activities) {
-			$body.= '<div>';
-			foreach ($activities AS $activity) {
-				$body.= elgg_view('informe/activity', array('entity' => $entity, 'full_view' => FALSE));
-			}
-			$body.= '</div>';
-		}
+		$body.= elgg_list_entities_from_relationship(array('relationship_guid' => $this->getGUID(), 'relationship' => 'report_activity'));
 		$body.= elgg_view('output/longtext', array('value' => '<b>Otros comentarios</b>'));
 		$body.= elgg_view('output/longtext', array('value' => $this->other_comments));
 		$body.='<p></p>';
