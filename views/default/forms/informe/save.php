@@ -298,6 +298,7 @@ function add_activity() {
 	var clone = $(".activities-block:first-child").clone();
 	clone.find('input, textarea').each(function() {
 			$(this).attr('name', $(this).attr('name').replace('[0]', '['+ i +']'));
+			$(this).attr('value', '');
 	});
 	clone.appendTo('#activities-block-container');
 	return false;
