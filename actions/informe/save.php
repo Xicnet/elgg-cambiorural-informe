@@ -213,16 +213,18 @@ if (!$error) {
 		// save activities
 		foreach($activities as $params) {
 			//error_log("activity title: " . $act_label);
-			$activity = new ElggReportActivity();
-			$activity->title = $params['title'];
-			$activity->date  = $params['date'];
-			$activity->scope = $params['scope'];
-			$activity->notes = $params['notes'];
-			if ($activity->save()) {
-				add_entity_relationship($informe->getGUID(), 'report_activity', $activity->guid);
-			} else {
-				register_error('informe:error:cannotsaveactivity');
-				forward(REFERER);
+			if(!empty($params['title'])) {
+				$activity = new ElggReportActivity();
+				$activity->title = $params['title'];
+				$activity->date  = $params['date'];
+				$activity->scope = $params['scope'];
+				$activity->notes = $params['notes'];
+				if ($activity->save()) {
+					add_entity_relationship($informe->getGUID(), 'report_activity', $activity->guid);
+				} else {
+					register_error('informe:error:cannotsaveactivity');
+					forward(REFERER);
+				}
 			}
 		}
 

@@ -36,10 +36,14 @@ $activity_notes = elgg_view('input/longtext', array(
 echo <<<___HTML
 
 <div class="elgg-output elgg-activity">
-        <h4>Actividad: $activity_label</h4>
-        <p><span class="elgg-date"> $activity_date</span>
+        <h4>Actividad</h4>
+        $activity_label
+        <h4>Fecha</h4>
+        <span class="elgg-date"> $activity_date</span>
+        <h4>Tipo</h4>
         $activity_scope
-        <h5>Comentarios</h5>$activity_notes
+        <h4>Comentarios</h4>
+	$activity_notes
 </div>
 
 ___HTML;

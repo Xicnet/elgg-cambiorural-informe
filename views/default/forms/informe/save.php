@@ -108,7 +108,10 @@ $productiv_input = elgg_view('input/text', array(
 	'value' => $vars['productiv']
 ));
 
-$activities = elgg_get_entities_from_relationship(array('relationship_guid' => $vars['guid'], 'relationship' => 'report_activity', 'inverse_relationship' => true));
+if($vars['guid']) {
+	$activities = elgg_get_entities_from_relationship(array('relationship_guid' => $vars['guid'], 'relationship' => 'report_activity', 'inverse_relationship' => true));
+}
+
 $activities_label = elgg_echo('Otras actividades desarrolladas durante el mes');
 $activities_input = elgg_view('input/activities', array('activities' => $activities));
 
@@ -415,12 +418,15 @@ function add_activity() {
 
 <div>
 	<label for="informe_activities">3. $activities_label</label>
-	<div id="activities-block-container">
-		<div class="activities-block">
-		$activities_input
+	<div class="_block">
+		<div id="activities-block-container">
+			<div class="activities-block">
+				$activities_input
+				<hr />
+			</div>
 		</div>
+		<a href="#" onclick="add_activity(); return false;">Agregar actividad</a>
 	</div>
-	<a href="#" onclick="add_activity(); return false;">Agregar</a>
 </div>
 
 <div>
