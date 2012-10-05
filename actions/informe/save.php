@@ -74,7 +74,6 @@ $values = array(
 	'status' => 'draft',
 	'access_id' => ACCESS_DEFAULT,
 	'comments_on' => 'On',
-	'excerpt' => '',
 	'tags' => '',
 	'container_guid' => (int)get_input('container_guid'),
 );
@@ -149,12 +148,6 @@ foreach ($values as $name => $default) {
 				$values[$name] = string_to_tag_array($value);
 			} else {
 				unset ($values[$name]);
-			}
-			break;
-
-		case 'excerpt':
-			if ($value) {
-				$values[$name] = elgg_get_excerpt($value);
 			}
 			break;
 

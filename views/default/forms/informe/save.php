@@ -440,10 +440,6 @@ function add_activity() {
 	$excerpt_input
 </div>
 
-<label for="informe_description">$body_label</label>
-$body_input
-<br />
-
 <div>
 	<label for="informe_tags">$tags_label</label>
 	$tags_input

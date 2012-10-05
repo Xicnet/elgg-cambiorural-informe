@@ -61,7 +61,8 @@ class ElggInforme extends ElggObject {
 	}
 
 	public function getSummary() {
-		return $this->topics;
+		//return $this->topics;
+		return '';
 	}
 
 	public function getBody() {
@@ -76,52 +77,179 @@ class ElggInforme extends ElggObject {
 		$ap = get_entity($this->meeting_ap);
 		$pa = get_entity($this->meeting_pa);
 		$report_month = strftime('%B %Y', strtotime($this->informe_period_y."-".$this->informe_period_m));
+		$activities = elgg_list_entities_from_relationship(array('relationship_guid' => $this->getGUID(), 'relationship' => 'report_activity'));
 
-		$body.= elgg_view('output/longtext', array('value' => '<b>Período</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $report_month));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Grupo</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $group->name));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Agente de Proyecto</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $ap->name));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Promotor Asesor</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $pa->name));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Nombre del representante</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->meeting_manager));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Establecimiento</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->building));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Fecha</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->meeting_date));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Lugar</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->meeting_place));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Cantidad de asistentes</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->meeting_assistance));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Temas tratados</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->topics));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Novedades</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->news));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Inquietudes y requerimientos</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->requirements));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Evaluación de la reunión</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->rating));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Aspectos positivos</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->pros));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Aspectos negativos</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->cons));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Comentarios</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->meeting_comments));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Evaluación de la situación productiva zonal</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->productiv));
-		$body.= elgg_view('output/longtext', array('value' => '<b>3. Otras actividades desarrolladas durante el mes</b>'));
-		$body.= elgg_list_entities_from_relationship(array('relationship_guid' => $this->getGUID(), 'relationship' => 'report_activity'));
-		$body.= elgg_view('output/longtext', array('value' => '<b>Otros comentarios</b>'));
-		$body.= elgg_view('output/longtext', array('value' => $this->other_comments));
-		$body.='<p></p>';
+$body .= <<<___HTML
 
-		// Sections
+<style>
+.elgg-input-longtext {
+        height: 50px;
+}
+label{
+}
+._activity{
 
-		//
+}
+._h{
+        display:none;
+}
+._block{
+        padding:15px;
+        margin-left:25px;
+        background-color: rgba(20%, 20%, 20%, 0.1);
+}
 
-		$body.= $this->description;
+h1{
+        font-size:20px;
+}
+</style>
+
+<div>
+	<label for="informe_period">Período</label>
+	$report_month
+	<span>$due_time</span>
+</div>
+
+<div>
+	<label for="informe_container_guid">Grupo</label>
+	$group->name
+</div>
+
+<div>
+	<label for="informe_group_pa">Promotor Asesor</label>
+	$pa->name
+</div>
+
+<div>
+	<label for="informe_group_ap">Agente de Proyecto</label>
+	$ap->name
+</div>
+
+<div>
+	<label for="informe_group_responsible_label">Nombre del representante</label>
+	$this->meeting_manager
+</div>
+
+<p>&nbsp;</p>
+
+<div>
+	<label for="informe_building">1. Reunión Mensual</label><br />
+</div>
+
+<div class='_block'>
+	<div>
+		<label for="informe_meeting_date">Fecha</label>
+		$this->meeting_date
+	</div>
+	<div>
+		<label for="informe_building">Establecimiento</label>
+		$this->building
+	</div>
+	<div>
+		<label for="informe_meeting_place">Lugar</label>
+		$this->meeting_place
+	</div>
+	<div>
+		<label for="informe_meeting_assistance">Cantidad de asistentes</label>
+		$this->meeting_assistance
+	</div>
+
+	<br />
+	<div class='_block'>
+		<div>
+			<label for="informe_topics">1.1. Temas tratados</label>
+			<div class='_block'>
+				<p>$this->topics</p>
+			</div>
+		</div>
+	</div>
+
+	<div class='_block'>
+		<div>
+			<label for="informe_news">1.2. Novedades</label>
+			<div class='_block'>
+				<p>$this->news</p>
+			</div>
+		</div>
+	</div>
+
+	<div class='_block'>
+		<div>
+			<label for="informe_requirements">1.3. Inquietudes y requerimientos</label>
+			<div class='_block'>
+				<p>$this->requirements</p>
+			</div>
+		</div>
+	</div>
+
+	<div class='_block'>
+		<div>
+			<label for="informe_rating">1.4. Evaluación de la reunión</label>
+		</div>
+		<div class='_block'>
+			<div>
+				<label for="informe_rating_value">Calificación</label>
+				$this->rating
+			</div>
+		</div>
+
+		<div class='_block'>
+			<div>
+				<label for="informe_pros">Aspectos positivos</label>
+				<p>$this->pros</p>
+			</div>
+		</div>
+
+		<div class='_block'>
+			<div>
+				<label for="informe_cons">Aspectos negativos</label>
+				<p>$this->cons</p>
+			</div>
+		</div>
+
+		<div class='_block'>
+			<div>
+				<label for="informe_meeting_comments">Comentarios</label>
+				<p>$this->meeting_comments</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<p>&nbsp;</p>
+
+<div>
+	<label for="informe_productiv">2. Evaluación de la situación productiva zonal</label>
+	<div class="_block">
+		<p>$this->productiv</p>
+	</div>
+</div>
+
+<p>&nbsp;</p>
+
+<div>
+	<label for="informe_activities">3. Otras actividades desarrolladas durante el mes</label>
+	<div class="_block">
+		<div id="activities-block-container">
+			<div class="activities-block">
+				$activities
+				<hr />
+			</div>
+		</div>
+	</div>
+</div>
+
+<p>&nbsp;</p>
+
+<div>
+	<label for="informe_other_comments">4. Otros comentarios</label>
+	<div class="_block">
+		<p>$this->other_comments</p>
+	</div>
+</div>
+
+___HTML;
+
 
 		$this->body = $body;
 		return $this->body;
