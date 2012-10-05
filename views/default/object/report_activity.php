@@ -17,18 +17,23 @@ $container = $entity->getContainerEntity();
 
 $title = $entity->title;
 $date  = strftime('%A %d %B %Y', strtotime($entity->date));
-$scope = $entity->scope;
+if($entity->scope == 1) {
+	$scope = 'Individual';
+} elseif($entity->scope == 2) {
+	$scope = 'Grupal';
+}
 $notes = $entity->notes;
 
 echo <<<___HTML
 
 <div class="elgg-report-activity" id="report-activity-{$entity->guid}">
-    <h4>$title</h4>
+    <p><b>Actividad</b> $title</p>
     <p>
-      <span class="activity-date">$date</span>
-      <span class="activity-scope">$scope</span>
-      <span class="activity-notes">$notes</span>
+      <p><b>Fecha</b> <span class="activity-date">$date</span></p>
+      <p><b>Tipo</b> <span class="activity-scope">$scope</span></p>
+      <p><b>Comentarios</b> <span class="activity-notes">$notes</span></p>
     </p>
+    <hr />
 </div>
 
 ___HTML;

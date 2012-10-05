@@ -109,7 +109,7 @@ $productiv_input = elgg_view('input/text', array(
 ));
 
 if($vars['guid']) {
-	$activities = elgg_get_entities_from_relationship(array('relationship_guid' => $vars['guid'], 'relationship' => 'report_activity', 'inverse_relationship' => true));
+	$activities = elgg_get_entities_from_relationship(array('relationship_guid' => $vars['guid'], 'relationship' => 'report_activity', 'inverse_relationship' => false));
 }
 
 $activities_label = elgg_echo('Otras actividades desarrolladas durante el mes');
@@ -295,12 +295,12 @@ h1{
 function add_activity() {
 	var i = $(".activities-block").children().size();
 	var input_parts;
-	var clone = $(".activities-block:first-child").clone();
+	var clone = $(".activities-block .elgg-activity:first-child").clone();
 	clone.find('input, textarea').each(function() {
 			$(this).attr('name', $(this).attr('name').replace('[0]', '['+ i +']'));
 			$(this).attr('value', '');
 	});
-	clone.appendTo('#activities-block-container');
+	clone.appendTo('#activities-block-container .activities-block:first-child');
 	return false;
 }
 </script>

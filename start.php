@@ -72,6 +72,7 @@ function informe_init() {
 	elgg_register_action('informe/save', "$action_path/save.php");
 	elgg_register_action('informe/auto_save_revision', "$action_path/auto_save_revision.php");
 	elgg_register_action('informe/delete', "$action_path/delete.php");
+	elgg_register_action('informe/deleteactivity', "$action_path/deleteactivity.php");
 
 	// entity menu
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'informe_entity_menu_setup');
