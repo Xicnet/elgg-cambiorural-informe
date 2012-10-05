@@ -100,8 +100,7 @@ if(get_input('status') == 'published') {
 		'cons',
 		'meeting_comments',
 		'productiv',
-		'other_comments',
-		'description'
+		'other_comments'
 	);
 }
 
@@ -207,13 +206,20 @@ if (!$error) {
 		foreach($activities as $params) {
 			//error_log("activity title: " . $act_label);
 			if(!empty($params['title'])) {
-				$activity = new ElggReportActivity();
+				error_log("PROCESSING ACTIVITY: " . $params['title']);
+				if($params['guid']) {
+					$activity = get_entity($params['guid']);
+					error_log("GETTING ACTIVITY WITH GUID: " . $params['guid']);
+				} else {
+					$activity = new ElggReportActivity();
+					error_log("CREATING ACTIVITY with title: " . $params['title']);
+				}
 				$activity->title = $params['title'];
 				$activity->date  = $params['date'];
 				$activity->scope = $params['scope'];
 				$activity->notes = $params['notes'];
 				if ($activity->save()) {
-					add_entity_relationship($informe->getGUID(), 'report_activity', $activity->guid);
+					add_entity_relationship($informe->getGUID(), 'report_activity', $activity->getGUID());
 				} else {
 					register_error('informe:error:cannotsaveactivity');
 					forward(REFERER);
