@@ -81,29 +81,6 @@ class ElggInforme extends ElggObject {
 
 $body .= <<<___HTML
 
-<style>
-.elgg-input-longtext {
-        height: 50px;
-}
-label{
-}
-._activity{
-
-}
-._h{
-        display:none;
-}
-._block{
-        padding:15px;
-        margin-left:25px;
-        background-color: rgba(20%, 20%, 20%, 0.1);
-}
-
-h1{
-        font-size:20px;
-}
-</style>
-
 <div>
 	<label for="informe_period">Período</label>
 	$report_month
