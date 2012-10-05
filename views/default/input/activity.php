@@ -9,7 +9,7 @@ $activity_label = elgg_view('input/text', array(
 ));
 
 
-if($entity->getGUID()) {
+if(elgg_instanceof($entity, 'report_activity')) {
 	$activity_guid = $entity->getGUID();
 	$activity_guid_hidden = elgg_view('input/hidden', Array('name' => "activities[$z][guid]", 'value' => $activity_guid));
 } else {
@@ -40,7 +40,7 @@ $activity_notes = elgg_view('input/longtext', array(
 	'value' => $entity->notes,
 ));
 
-if ($entity->canEdit()) {
+if (elgg_instanceof($entity, 'report_activity') && $entity->canEdit()) {
 
 	$options = array('guid' => $entity->guid);
 
