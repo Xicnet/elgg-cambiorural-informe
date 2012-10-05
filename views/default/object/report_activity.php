@@ -33,7 +33,6 @@ echo <<<___HTML
       <p><b>Tipo</b> <span class="activity-scope">$scope</span></p>
       <p><b>Comentarios</b> <span class="activity-notes">$notes</span></p>
     </p>
-    <hr />
 </div>
 
 ___HTML;

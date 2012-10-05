@@ -201,18 +201,13 @@ if (!$error) {
 if (!$error) {
 	if ($informe->save()) {
 		
-			//error_log(print_r($activities, true));
 		// save activities
 		foreach($activities as $params) {
-			//error_log("activity title: " . $act_label);
 			if(!empty($params['title'])) {
-				error_log("PROCESSING ACTIVITY: " . $params['title']);
 				if($params['guid']) {
 					$activity = get_entity($params['guid']);
-					error_log("GETTING ACTIVITY WITH GUID: " . $params['guid']);
 				} else {
 					$activity = new ElggReportActivity();
-					error_log("CREATING ACTIVITY with title: " . $params['title']);
 				}
 				$activity->title = $params['title'];
 				$activity->date  = $params['date'];

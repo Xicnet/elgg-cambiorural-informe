@@ -423,7 +423,6 @@ function add_activity() {
 		<div id="activities-block-container">
 			<div class="activities-block">
 				$activities_input
-				<hr />
 			</div>
 		</div>
 		<a href="#" onclick="add_activity(); return false;">Agregar actividad</a>
