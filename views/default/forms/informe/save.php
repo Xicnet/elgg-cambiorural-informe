@@ -109,7 +109,7 @@ $productiv_input = elgg_view('input/text', array(
 ));
 
 if($vars['guid']) {
-	$activities = elgg_get_entities_from_relationship(array('relationship_guid' => $vars['guid'], 'relationship' => 'report_activity', 'inverse_relationship' => false));
+	$activities = elgg_get_entities_from_relationship(array('relationship_guid' => $vars['guid'], 'relationship' => 'report_activity', 'inverse_relationship' => false, 'order_by_metadata' => array( 'name' => 'date', 'direction' => ASC)));
 }
 
 $activities_label = elgg_echo('Otras actividades desarrolladas durante el mes');
@@ -161,20 +161,6 @@ $meeting_assistance_input = elgg_view('input/text', array(
 	'value' => $vars['meeting_assistance']
 ));
 
-$excerpt_label = elgg_echo('informe:excerpt');
-$excerpt_input = elgg_view('input/text', array(
-	'name' => 'excerpt',
-	'id' => 'informe_excerpt',
-	'value' => html_entity_decode($vars['excerpt'], ENT_COMPAT, 'UTF-8')
-));
-
-$body_label = elgg_echo('informe:body');
-$body_input = elgg_view('input/longtext', array(
-	'name' => 'description',
-	'id' => 'informe_description',
-	'value' => $vars['description']
-));
-
 $save_status = elgg_echo('informe:save_status');
 if ($vars['guid']) {
 	$entity = get_entity($vars['guid']);
@@ -200,13 +186,6 @@ $comments_input = elgg_view('input/dropdown', array(
 	'id' => 'informe_comments_on',
 	'value' => $vars['comments_on'],
 	'options_values' => array('On' => elgg_echo('on'), 'Off' => elgg_echo('off'))
-));
-
-$tags_label = elgg_echo('tags');
-$tags_input = elgg_view('input/tags', array(
-	'name' => 'tags',
-	'id' => 'informe_tags',
-	'value' => $vars['tags']
 ));
 
 $access_label = elgg_echo('access');
@@ -432,16 +411,6 @@ function add_activity() {
 <div>
 	<label for="informe_other_comments">4. $other_comments_label</label>
 	$other_comments_input
-</div>
-
-<div>
-	<label for="informe_excerpt">$excerpt_label</label>
-	$excerpt_input
-</div>
-
-<div>
-	<label for="informe_tags">$tags_label</label>
-	$tags_input
 </div>
 
 $categories_input
