@@ -275,11 +275,23 @@ function add_activity() {
 	var i = $(".activities-block").children().size();
 	var input_parts;
 	var clone = $(".activities-block .elgg-activity:first-child").clone();
+	/*
 	clone.find('input, textarea').each(function() {
-			$(this).attr('name', $(this).attr('name').replace('[0]', '['+ i +']'));
-			$(this).attr('value', '');
+			$(this).attr('name', $(this).attr('name').replace('[0]', '['+ i +']')).attr('value', '');
+			if($(this).is('.elgg-input-date')) {
+				$(this).attr('id', 'dp0');
+			}
 	});
 	clone.appendTo('#activities-block-container .activities-block:first-child');
+			elgg.ui.initDatePicker();
+	*/
+	elgg.get('/informe/inputactivity?c=' + i, {
+		html: 'html',
+		success: function(resultText, success, xhr) {
+			$('#activities-block-container .activities-block:first-child').append(resultText);
+			elgg.ui.initDatePicker();
+		}
+	});
 	return false;
 }
 </script>
@@ -361,28 +373,19 @@ function add_activity() {
 		<div>
 			<label for="informe_rating">1.4. $rating_label</label>
 		</div>
-		<div class='_block'>
+		<div class='_block elgg-report-activity'>
 			<div>
 				<label>Califique la reunión (1 ~ 10):</label><br />
 				$rating_input
 			</div>
-		</div>
-
-		<div class='_block'>
 			<div>
 				<label for="informe_pros">$pros_label</label>
 				$pros_input
 			</div>
-		</div>
-
-		<div class='_block'>
 			<div>
 				<label for="informe_cons">$cons_label</label>
 				$cons_input
 			</div>
-		</div>
-
-		<div class='_block'>
 			<div>
 				<label for="informe_meeting_comments">$meeting_comments_label</label>
 				$meeting_comments_input

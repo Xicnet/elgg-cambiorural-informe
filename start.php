@@ -118,6 +118,14 @@ function informe_page_handler($page) {
 
 	$page_type = $page[0];
 	switch ($page_type) {
+		case 'inputactivity':
+			$c = get_input('c', 0);
+			set_input('c', intval($c));
+			$body = elgg_view('input/activities');
+			header("Content-type: text/html");
+			header("Content-length: " . sizeof($body));
+			echo $body;
+			exit;
 		case 'owner':
 			$user = get_user_by_username($page[1]);
 			$params = informe_get_page_content_list($user->guid);

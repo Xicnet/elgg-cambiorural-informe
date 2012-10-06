@@ -1,7 +1,6 @@
 <?php
 
-$report_activities_count = 0;
-
+$report_activities_count = intval(get_input('c'));
 $activities = $vars['activities'];
 
 if (empty($activities)) {
