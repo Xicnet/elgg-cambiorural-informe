@@ -17,11 +17,7 @@ $container = $entity->getContainerEntity();
 
 $title = $entity->title;
 $date  = strftime('%A %d %B %Y', strtotime($entity->date));
-if($entity->scope == 1) {
-	$scope = 'Individual';
-} elseif($entity->scope == 2) {
-	$scope = 'Grupal';
-}
+$scope = $entity->scope;
 $notes = $entity->notes;
 
 echo <<<___HTML

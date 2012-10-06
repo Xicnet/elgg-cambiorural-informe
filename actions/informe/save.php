@@ -74,7 +74,6 @@ $values = array(
 	'status' => 'draft',
 	'access_id' => ACCESS_DEFAULT,
 	'comments_on' => 'On',
-	'tags' => '',
 	'container_guid' => (int)get_input('container_guid'),
 );
 

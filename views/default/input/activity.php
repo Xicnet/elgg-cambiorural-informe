@@ -9,18 +9,20 @@ $activity_label = elgg_view('input/text', array(
 ));
 
 
-if(elgg_instanceof($entity, 'report_activity')) {
+if(elgg_instanceof($entity, 'object', 'report_activity')) {
 	$activity_guid = $entity->getGUID();
 	$activity_guid_hidden = elgg_view('input/hidden', Array('name' => "activities[$z][guid]", 'value' => $activity_guid));
 } else {
 	$activity_guid_hidden = '';
 }
 
-if (empty($vars['activity_date'])) {
+if (elgg_instanceof($entity, 'object', 'report_activity') && empty($entity->date)) {
     $activity_date = NULL;
 } else {
-    $activity_date = strftime('%B %d %F %Y', $entity->date);
+    #$activity_date = strftime('%B %d %F %Y', $entity->date);
+    $activity_date = $entity->date;
 }
+
 $activity_date = elgg_view('input/date', array(
         'name' => "activities[$z][date]",
         'value' => $activity_date
@@ -32,15 +34,15 @@ $activity_scope = elgg_view(
                                 'name' => "activities[$z][scope]",
 				'value' => $entity->scope,
                         'options' => array(
-                                'Individual' => '1',
-                                'Grupal' => '2'
+                                'Individual' => 'Individual',
+                                'Grupal' => 'Grupal'
 )));
 $activity_notes = elgg_view('input/longtext', array(
                                                 'name' => "activities[$z][notes]",
 	'value' => $entity->notes,
 ));
 
-if (elgg_instanceof($entity, 'report_activity') && $entity->canEdit()) {
+if (elgg_instanceof($entity, 'object', 'report_activity') && $entity->canEdit()) {
 
 	$options = array('guid' => $entity->guid);
 
