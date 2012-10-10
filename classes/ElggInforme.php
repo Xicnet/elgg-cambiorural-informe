@@ -80,6 +80,10 @@ class ElggInforme extends ElggObject {
 		$meeting_date = strftime('%A %d %B %Y', strtotime($this->meeting_date));
 		$activities = elgg_list_entities_from_relationship(array('relationship_guid' => $this->getGUID(), 'relationship' => 'report_activity'));
 
+		// optional values
+		$informe_productiv = empty($this->productiv) ? elgg_echo('informe:empty:field') : $this->productiv;
+		$other_comments    = empty($this->other_comments) ? elgg_echo('informe:empty:field') : $this->other_comments;
+
 $body .= <<<___HTML
 
 <div>
@@ -199,7 +203,7 @@ $body .= <<<___HTML
 <div>
 	<label for="informe_productiv">2. Evaluación de la situación productiva zonal</label>
 	<div class="_block">
-		<p>$this->productiv</p>
+		<p>$informe_productiv</p>
 	</div>
 </div>
 
@@ -222,7 +226,7 @@ $body .= <<<___HTML
 <div>
 	<label for="informe_other_comments">4. Otros comentarios</label>
 	<div class="_block">
-		<p>$this->other_comments</p>
+		<p>$other_comments</p>
 	</div>
 </div>
 
