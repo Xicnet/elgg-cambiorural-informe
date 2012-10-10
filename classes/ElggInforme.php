@@ -120,7 +120,7 @@ $body .= <<<___HTML
 	</div>
 	<div>
 		<label for="informe_building">Establecimiento</label>
-		$this->building
+		$this->meeting_building
 	</div>
 	<div>
 		<label for="informe_meeting_place">Lugar</label>
