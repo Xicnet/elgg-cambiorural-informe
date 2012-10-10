@@ -84,6 +84,18 @@ class ElggInforme extends ElggObject {
 		$informe_productiv = empty($this->productiv) ? elgg_echo('informe:empty:field') : $this->productiv;
 		$other_comments    = empty($this->other_comments) ? elgg_echo('informe:empty:field') : $this->other_comments;
 
+		// entity links
+		$options = array('text' => $group->name, 'href' => $group->getURL());
+		$group_link = elgg_view('output/url',  $options);
+
+		if (elgg_instanceof($ap, 'user')) {
+			$options = array('text' => $ap->name, 'href' => $ap->getURL());
+			$ap_link = elgg_view('output/url',  $options);
+		}
+		if (elgg_instanceof($pa, 'user')) {
+			$options = array('text' => $pa->name, 'href' => $pa->getURL());
+			$pa_link = elgg_view('output/url',  $options);
+		}
 $body .= <<<___HTML
 
 <div>
@@ -94,17 +106,17 @@ $body .= <<<___HTML
 
 <div>
 	<label for="informe_container_guid">Grupo</label>
-	$group->name
+	$group_link
 </div>
 
 <div>
 	<label for="informe_group_pa">Promotor Asesor</label>
-	$pa->name
+	$pa_link
 </div>
 
 <div>
 	<label for="informe_group_ap">Agente de Proyecto</label>
-	$ap->name
+	$ap_link
 </div>
 
 <div>
