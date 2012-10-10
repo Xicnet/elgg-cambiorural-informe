@@ -77,6 +77,7 @@ class ElggInforme extends ElggObject {
 		$ap = get_entity($this->meeting_ap);
 		$pa = get_entity($this->meeting_pa);
 		$report_month = strftime('%B %Y', strtotime($this->informe_period_y."-".$this->informe_period_m));
+		$meeting_date = strftime('%A %d %B %Y', strtotime($this->meeting_date));
 		$activities = elgg_list_entities_from_relationship(array('relationship_guid' => $this->getGUID(), 'relationship' => 'report_activity'));
 
 $body .= <<<___HTML
@@ -116,7 +117,7 @@ $body .= <<<___HTML
 <div class='_block'>
 	<div>
 		<label for="informe_meeting_date">Fecha</label>
-		$this->meeting_date
+		$meeting_date
 	</div>
 	<div>
 		<label for="informe_building">Establecimiento</label>
