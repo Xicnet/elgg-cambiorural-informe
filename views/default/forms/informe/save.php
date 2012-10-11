@@ -51,21 +51,21 @@ $informe_period_y_value = $vars['informe_period_y'] ? $vars['informe_period_y'] 
 $informe_period_y_input  = elgg_view('input/dropdown', array('name' => 'informe_period_y', 'value' => $informe_period_y_value, 'options_values' => array('2011' => '2011', '2012' => '2012')));
 
 $topics_label = elgg_echo('Temas tratados');
-$topics_input = elgg_view('input/text', array(
+$topics_input = elgg_view('input/longtext', array(
 	'name' => 'topics',
 	'id' => 'informe_topics',
 	'value' => $vars['topics']
 ));
 
 $news_label = elgg_echo('Novedades');
-$news_input = elgg_view('input/text', array(
+$news_input = elgg_view('input/longtext', array(
 	'name' => 'news',
 	'id' => 'informe_news',
 	'value' => $vars['news']
 ));
 
 $requirements_label = elgg_echo('Inquietudes y requerimientos');
-$requirements_input = elgg_view('input/text', array(
+$requirements_input = elgg_view('input/longtext', array(
 	'name' => 'requirements',
 	'id' => 'informe_requirements',
 	'value' => $vars['requirements']
@@ -81,28 +81,28 @@ $rating_input = elgg_view('input/dropdown', array(
 ));
 
 $pros_label = elgg_echo('Aspectos positivos');
-$pros_input = elgg_view('input/text', array(
+$pros_input = elgg_view('input/longtext', array(
 	'name' => 'pros',
 	'id' => 'informe_pros',
 	'value' => $vars['pros']
 ));
 
 $cons_label = elgg_echo('Aspectos negativos');
-$cons_input = elgg_view('input/text', array(
+$cons_input = elgg_view('input/longtext', array(
 	'name' => 'cons',
 	'id' => 'informe_cons',
 	'value' => $vars['cons']
 ));
 
 $meeting_comments_label = elgg_echo('Comentarios');
-$meeting_comments_input = elgg_view('input/text', array(
+$meeting_comments_input = elgg_view('input/longtext', array(
 	'name' => 'meeting_comments',
 	'id' => 'informe_meeting_comments',
 	'value' => $vars['meeting_comments']
 ));
 
 $productiv_label = elgg_echo('Evaluación de la situación productiva zonal');
-$productiv_input = elgg_view('input/text', array(
+$productiv_input = elgg_view('input/longtext', array(
 	'name' => 'productiv',
 	'id' => 'informe_productiv',
 	'value' => $vars['productiv']
@@ -116,7 +116,7 @@ $activities_label = elgg_echo('Otras actividades desarrolladas durante el mes');
 $activities_input = elgg_view('input/activities', array('activities' => $activities));
 
 $other_comments_label = elgg_echo('Otros comentarios');
-$other_comments_input = elgg_view('input/text', array(
+$other_comments_input = elgg_view('input/longtext', array(
 	'name' => 'other_comments',
 	'id' => 'informe_other_comments',
 	'value' => $vars['other_comments']

@@ -78,11 +78,17 @@ class ElggInforme extends ElggObject {
 		$pa = get_entity($this->meeting_pa);
 		$report_month = strftime('%B %Y', strtotime($this->informe_period_y."-".$this->informe_period_m));
 		$meeting_date = strftime('%A %d %B %Y', strtotime($this->meeting_date));
+		$topics = nl2br($this->topics);
+		$news = nl2br($this->news);
+		$requirements = nl2br($this->requirements);
+		$pros = nl2br($this->pros);
+		$cons = nl2br($this->cons);
+		$meeting_comments = nl2br($this->meeting_comments);
 		$activities = elgg_list_entities_from_relationship(array('relationship_guid' => $this->getGUID(), 'relationship' => 'report_activity'));
 
 		// optional values
-		$informe_productiv = empty($this->productiv) ? elgg_echo('informe:empty:field') : $this->productiv;
-		$other_comments    = empty($this->other_comments) ? elgg_echo('informe:empty:field') : $this->other_comments;
+		$informe_productiv = empty($this->productiv) ? elgg_echo('informe:empty:field') : nl2br($this->productiv);
+		$other_comments    = empty($this->other_comments) ? elgg_echo('informe:empty:field') : nl2br($this->other_comments);
 
 		// entity links
 		$options = array('text' => $group->name, 'href' => $group->getURL());
@@ -154,7 +160,7 @@ $body .= <<<___HTML
 		<div>
 			<label for="informe_topics">1.1. Temas tratados</label>
 			<div class='_block'>
-				<p>$this->topics</p>
+				<p>$topics</p>
 			</div>
 		</div>
 	</div>
@@ -163,7 +169,7 @@ $body .= <<<___HTML
 		<div>
 			<label for="informe_news">1.2. Novedades</label>
 			<div class='_block'>
-				<p>$this->news</p>
+				<p>$news</p>
 			</div>
 		</div>
 	</div>
@@ -172,7 +178,7 @@ $body .= <<<___HTML
 		<div>
 			<label for="informe_requirements">1.3. Inquietudes y requerimientos</label>
 			<div class='_block'>
-				<p>$this->requirements</p>
+				<p>$requirements</p>
 			</div>
 		</div>
 	</div>
@@ -191,21 +197,21 @@ $body .= <<<___HTML
 		<div class='_block'>
 			<div>
 				<label for="informe_pros">Aspectos positivos</label>
-				<p>$this->pros</p>
+				<p>$pros</p>
 			</div>
 		</div>
 
 		<div class='_block'>
 			<div>
 				<label for="informe_cons">Aspectos negativos</label>
-				<p>$this->cons</p>
+				<p>$cons</p>
 			</div>
 		</div>
 
 		<div class='_block'>
 			<div>
 				<label for="informe_meeting_comments">Comentarios</label>
-				<p>$this->meeting_comments</p>
+				<p>$meeting_comments</p>
 			</div>
 		</div>
 	</div>
