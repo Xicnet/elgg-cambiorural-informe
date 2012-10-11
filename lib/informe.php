@@ -415,7 +415,7 @@ function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 		'informe_period_y' => NULL,
 		'meeting_pa' => NULL,
 		'meeting_ap' => NULL,
-		'building' => NULL,
+		'meeting_building' => NULL,
 		'meeting_manager' => NULL,
 		'meeting_date' => NULL,
 		'meeting_place' => NULL,

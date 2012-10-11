@@ -8,6 +8,7 @@ $Spanish = Array(
 	'river:create:object:informe' => '%s ha publicado el %s',
 	'informe:empty:field' => '-',
 	'river:create:object:default' => '%s creó %s',
+	'informe:notaninforme' => 'El objeto no es un informe',
 );
 
 add_translation('es', $Spanish);

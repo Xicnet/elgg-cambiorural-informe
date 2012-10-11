@@ -96,6 +96,7 @@ class ElggInforme extends ElggObject {
 			$options = array('text' => $pa->name, 'href' => $pa->getURL());
 			$pa_link = elgg_view('output/url',  $options);
 		}
+
 $body .= <<<___HTML
 
 <div>

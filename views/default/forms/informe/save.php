@@ -142,9 +142,9 @@ $meeting_date_input = elgg_view('input/date', array(
 
 $building_label = elgg_echo('Establecimiento');
 $building_input = elgg_view('input/text', array(
-	'name' => 'building',
-	'id' => 'informe_building',
-	'value' => $vars['building']
+	'name' => 'meeting_building',
+	'id' => 'meeting_building',
+	'value' => $vars['meeting_building']
 ));
 
 $meeting_place_label = elgg_echo('Lugar');
@@ -164,6 +164,10 @@ $meeting_assistance_input = elgg_view('input/text', array(
 $save_status = elgg_echo('informe:save_status');
 if ($vars['guid']) {
 	$entity = get_entity($vars['guid']);
+	if (!elgg_instanceof($entity, 'object', 'informe')) {
+		register_error(elgg_echo('informe:notaninforme'));
+		forward(REFERRER);
+	}
 	$saved = date('F j, Y @ H:i', $entity->time_created);
 } else {
 	$saved = elgg_echo('informe:never');

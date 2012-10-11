@@ -57,7 +57,7 @@ $values = array(
 	'meeting_pa' => '',
 	'meeting_ap' => '',
 	'meeting_manager' => '',
-	'building' => '',
+	'meeting_building' => '',
 	'meeting_date' => '',
 	'meeting_place' => '',
 	'meeting_assistance' => '',
@@ -88,18 +88,18 @@ if(get_input('status') == 'published') {
 		'meeting_ap',
 		'meeting_manager',
 		'meeting_date',
-		'building',
+		'meeting_building',
 		'meeting_place',
-		'meeting_assistance',
+		#'meeting_assistance',
 		'topics',
 		'news',
-		'requirements',
-		'rating',
-		'pros',
-		'cons',
-		'meeting_comments',
-		'productiv',
-		'other_comments'
+		#'requirements',
+		#'rating',
+		#'pros',
+		#'cons',
+		#'meeting_comments',
+		#'productiv',
+		#'other_comments'
 	);
 }
 
@@ -117,7 +117,7 @@ foreach ($values as $name => $default) {
 
 	switch ($name) {
 		case 'meeting_manager':
-		case 'building':
+		case 'meeting_building':
 		case 'meeting_date':
 		case 'meeting_place':
 		case 'meeting_assistance':
