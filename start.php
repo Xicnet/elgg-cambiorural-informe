@@ -128,7 +128,7 @@ function informe_page_handler($page) {
 			exit;
 		case 'owner':
 			$user = get_user_by_username($page[1]);
-			$params = informe_get_page_content_list($user->guid);
+			$params = informe_owner_get_page_content_list($user->guid);
 			break;
 		case 'friends':
 			$user = get_user_by_username($page[1]);
