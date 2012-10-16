@@ -1,8 +1,11 @@
 <?php
 
 $Spanish = Array(
+				 'informe:add' => 'Crear informe',
+				 'informe:informes' => 'Informes',
 				 'informe:group_ap' => 'Agente de Proyecto',
-				 'informe:group_pa' => 'Promotor Asesor', 
+				 'informe:group_pa' => 'Promotor Asesor',
+				 'informe:group' => 'Informes mensuales',
 				 'informe:error:missing:meeting_manager' => 'Falta el nombre del representante',
 				 'informe:error:missing:building' => 'Falta el establecimiento',
 	'river:create:object:informe' => '%s ha publicado el %s',
