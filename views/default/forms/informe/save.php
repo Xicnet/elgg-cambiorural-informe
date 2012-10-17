@@ -223,7 +223,7 @@ if (!elgg_instanceof($group, 'group')) {
 
 	$group_label = elgg_echo('group');
 	$group_input = elgg_view('input/dropdown', array(
-		'name' => 'informe_container_guid',
+		'name' => 'container_guid',
 		'id' => 'group_guid_picker',
 		'value' => $vars['group_guid'],
 		'options_values' => $group_options,
@@ -307,7 +307,7 @@ function add_activity() {
 </div>
 
 <div>
-	<label for="informe_container_guid">$group_label</label>
+	<label for="container_guid">$group_label</label>
 	$group_input
 	$group_input_hidden
 </div>
