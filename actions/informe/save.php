@@ -48,6 +48,11 @@ $old_status = $informe->status;
 $container_guid = (int)get_input('container_guid');
 $group = get_entity($container_guid);
 
+if (!elgg_instanceof($group, 'group')) {
+    register_error(elgg_echo('informe:error:nocontainer'));
+    forward(REFERRER);
+}
+
 // period for this report
 $report_month = strftime('%B %Y', strtotime(get_input('informe_period_y')."-".get_input('informe_period_m')));
 $values = array(
@@ -74,7 +79,7 @@ $values = array(
 	'status' => 'draft',
 	'access_id' => ACCESS_DEFAULT,
 	'comments_on' => 'On',
-	'container_guid' => (int)get_input('container_guid'),
+	'container_guid' => $group->guid,
 );
 
 // fail if a required entity isn't set
