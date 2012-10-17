@@ -144,7 +144,29 @@ function informe_page_handler($page) {
 			break;
 		case 'add':
 			gatekeeper();
-			$params = informe_get_page_content_edit($page_type, $page[1]);
+			$entity = get_entity($page[1]);
+			if (elgg_instanceof($entity, 'user')) {
+				$groups = get_users_membership($entity->guid);
+
+				if (!empty($groups) && sizeof($groups) == 1) {
+					$guid = $groups[0]->guid;
+					set_input('container_guid', $guid);
+				} else {
+					$guid = 0;
+				}
+
+			} else if (elgg_instanceof($entity, 'group')) {
+				set_input('container_guid', $entity->guid);
+
+			} else if (elgg_instanceof($entity, 'object', 'informe')) {
+				$guid = $entity->container_guid;
+				set_input('container_guid', $guid);
+
+			} else {
+				register_error(elgg_echo('informer:error:invalidentity'));
+				forward(REFERRER);
+			}
+			$params = informe_get_page_content_edit($page_type, $guid);
 			break;
 		case 'edit':
 			gatekeeper();
