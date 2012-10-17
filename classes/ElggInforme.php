@@ -55,9 +55,9 @@ class ElggInforme extends ElggObject {
 			return FALSE;
 		}
 		$user_guid = $user->guid;
+		$group = $this->getContainerEntity();
 
-//		error_log("====== ElggInforme canEdit($user_guid) meeting_pa = {$this->meeting_pa}");
-		return (parent::canEdit() && $this->meeting_pa == $user_guid);
+		return (parent::canEdit() && ($user_guid == $group->pa || $this->meeting_pa == $user_guid));
 	}
 
 	public function getSummary() {
