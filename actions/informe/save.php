@@ -145,6 +145,9 @@ foreach ($values as $name => $default) {
 				unset ($values[$name]);
 			}
 			break;
+                case 'meeting_ap':
+			$values[$name] = $value;
+			break;
 
 		case 'tags':
 			if ($value) {
@@ -176,6 +179,11 @@ foreach ($values as $name => $default) {
 			$values[$name] = $value;
 			break;
 	}
+
+	$values['description'] = $values['meeting_manager']." ".  $values['meeting_building']." ".
+				$values['meeting_place']." ". $values['news']." ". $values['requirements']." ".
+				$values['pros']." ". $values['cons']." ". $values['meeting_comments']." ".
+				$values['productiv']." ". $values['other_comments']." ". $values['topics'];
 }
 
 // if preview, force status to be draft
