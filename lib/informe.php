@@ -1,10 +1,10 @@
 <?php
 /**
- * Blog helper functions
+ * Informe helper functions
  *
- * @package Blog
+ * @package     XicNET
+ * @subpackage  Informe
  */
-
 
 /**
  * Get page components to view a informe post.
@@ -73,7 +73,7 @@ function informe_get_page_content_list($container_guid = NULL) {
 		$options['container_guid'] = $container_guid;
 		$container = get_entity($container_guid);
 		if (!$container) {
-
+			// @fixme then what?
 		}
 		$return['title'] = elgg_echo('informe:title:user_informes', array($container->name));
 
@@ -141,7 +141,7 @@ function informe_owner_get_page_content_list($owner_guid = NULL) {
 		$options['owner_guid'] = $owner_guid;
 		$owner = get_entity($owner_guid);
 		if (!$container) {
-
+			// @fixme then what?
 		}
 		$return['title'] = elgg_echo('informe:title:user_informes', array($owner->name));
 
@@ -439,7 +439,7 @@ function informe_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 
 			elgg_push_breadcrumb($informe->title, $informe->getURL());
 			elgg_push_breadcrumb(elgg_echo('edit'));
-			
+
 			elgg_load_js('elgg.informe');
 
 			$content = elgg_view_form('informe/save', $vars, $body_vars);
@@ -464,7 +464,7 @@ function informe_get_page_content_edit($page, $guid = 0, $revision = NULL) {
 	$return['title'] = $title;
 	$return['content'] = $content;
 	$return['sidebar'] = $sidebar;
-	return $return;	
+	return $return;
 }
 
 /**
@@ -522,7 +522,7 @@ function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 			$values[$key] = $value;
 		}
 	}
-	
+
 	elgg_clear_sticky_form('informe');
 
 	if (!$post) {
