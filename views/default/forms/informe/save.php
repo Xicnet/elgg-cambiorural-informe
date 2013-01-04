@@ -45,9 +45,9 @@ $action_buttons = $save_button . $preview_button . $delete_link;
 $months = array('1' => 'Enero', '2' => 'Febrero', '3' => 'Marzo', '4' => 'Abril', '5' => 'Mayo', '6' => 'Junio', '7' => 'Julio', '8' => 'Agosto', '9' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre');
 
 $informe_period_label = elgg_echo('Período');
-$informe_period_m_value = $vars['informe_period_m'] ? $vars['informe_period_m'] : date('n');
+$informe_period_m_value = !empty($vars['informe_period_m']) ? $vars['informe_period_m'] : date('n');
 $informe_period_m_input = elgg_view('input/dropdown', array('name' => 'informe_period_m', 'value' => $informe_period_m_value, 'options_values' => $months));
-$informe_period_y_value = $vars['informe_period_y'] ? $vars['informe_period_y'] : date('Y');
+$informe_period_y_value = !empty($vars['informe_period_y']) ? $vars['informe_period_y'] : date('Y');
 $informe_period_y_input  = elgg_view('input/dropdown', array('name' => 'informe_period_y', 'value' => $informe_period_y_value, 'options_values' => array('2011' => '2011', '2012' => '2012', '2013' => '2013')));
 
 $topics_label = elgg_echo('Temas tratados');
