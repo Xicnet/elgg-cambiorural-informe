@@ -48,7 +48,7 @@ $informe_period_label = elgg_echo('Período');
 $informe_period_m_value = $vars['informe_period_m'] ? $vars['informe_period_m'] : date('n');
 $informe_period_m_input = elgg_view('input/dropdown', array('name' => 'informe_period_m', 'value' => $informe_period_m_value, 'options_values' => $months));
 $informe_period_y_value = $vars['informe_period_y'] ? $vars['informe_period_y'] : date('Y');
-$informe_period_y_input  = elgg_view('input/dropdown', array('name' => 'informe_period_y', 'value' => $informe_period_y_value, 'options_values' => array('2011' => '2011', '2012' => '2012')));
+$informe_period_y_input  = elgg_view('input/dropdown', array('name' => 'informe_period_y', 'value' => $informe_period_y_value, 'options_values' => array('2011' => '2011', '2012' => '2012', '2013' => '2013')));
 
 $topics_label = elgg_echo('Temas tratados');
 $topics_input = elgg_view('input/longtext', array(
