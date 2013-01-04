@@ -21,6 +21,10 @@ $guid = get_input('guid');
 
 $activities = get_input('activities');
 
+// group this report belongs to
+$container_guid = (int)get_input('container_guid');
+$group = get_entity($container_guid);
+
 if ($guid) {
 	$entity = get_entity($guid);
 	if (elgg_instanceof($entity, 'object', 'informe') && $entity->canEdit()) {
@@ -36,6 +40,8 @@ if ($guid) {
 } else {
 	$informe = new ElggInforme();
 	$informe->subtype = 'informe';
+	$informe->meeting_ap = $group->ap;
+	$informe->meeting_pa = $group->pa;
 	$new_post = TRUE;
 }
 
@@ -43,10 +49,6 @@ if ($guid) {
 $old_status = $informe->status;
 
 // set defaults and required values.
-
-// group this report belongs to
-$container_guid = (int)get_input('container_guid');
-$group = get_entity($container_guid);
 
 if (!elgg_instanceof($group, 'group')) {
     register_error(elgg_echo('informe:error:nocontainer'));
@@ -59,8 +61,8 @@ $values = array(
 	'title' => "Informe del grupo ".$group->name." ($report_month)",
 	'informe_period_m' => '',
 	'informe_period_y' => '',
-	'meeting_pa' => '',
-	'meeting_ap' => '',
+	#'meeting_pa' => '',
+	#'meeting_ap' => '',
 	'meeting_manager' => '',
 	'meeting_building' => '',
 	'meeting_date' => '',
