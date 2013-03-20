@@ -1,6 +1,8 @@
 <?php
 
 $Spanish = Array(
+				 'informe' => 'Informe',
+				 'informe:informes' => 'Informes',
 				 'informe:add' => 'Crear informe',
 				 'informe:informes' => 'Informes',
 				 'informe:group_ap' => 'Agente de Proyecto',
@@ -14,6 +16,8 @@ $Spanish = Array(
 	'informe:empty:field' => '-',
 	'river:create:object:default' => '%s creó %s',
 	'informe:notaninforme' => 'El objeto no es un informe',
+	'informe:noblogs' => 'No hay informes',
+	'admin:administer_utilities:informe_stats' => 'Stats de informes',
 );
 
 add_translation('es', $Spanish);

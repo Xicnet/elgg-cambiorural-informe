@@ -5,6 +5,34 @@ td {
 	border: 1px solid orange;
 	padding: 3px;
 }
+div.cell {
+	border: 1px solid black;
+	padding: 3px;
+}
+div.cell.period {
+	float: left;
+	width: 5%;
+}
+div.cell.informe_guid {
+	float: left;
+	width: 5%;
+}
+div.cell.informe_title {
+	float: left;
+	width: 30%;
+}
+div.cell.group_guid {
+	float: left;
+	width: 5%;
+}
+div.cell.group_name {
+	float: left;
+	width: 20%;
+}
+div.cell.informe_pa {
+	float: left;
+	width: 20%;
+}
 </style>
 <?php
 /**
@@ -13,15 +41,20 @@ td {
  * @package ElggReportedContent
  */
 
+$limit = get_input("limit", 5);
+$offset = get_input("offset", 0);
+
 $options = array('type' => 'object', 'subtype' => 'informe',
-                'limit' => 200
+                'limit' => $limit,
+                'offset' => $offset,
                 );
 
+error_log(1);
 $list = elgg_get_entities($options);
+error_log(2);
 
 $informes = array();
 
-echo "<table>";
 foreach($list as $informe) {
 /*
         $informe_pa      = get_entity($informe->meeting_pa);
@@ -33,9 +66,7 @@ foreach($list as $informe) {
         $group_guid      = $group->getGUID();
         $group_name      = $group->name;
         $group_pa        = $informe_pa->name;
-*/
 	
-	$i = array();
         $informe_pa = get_entity($informe->meeting_pa);
         $group      = get_entity($informe->container_guid);
         $i[] = $informe->informe_period_y . str_pad($informe->informe_period_m, 2, 0, STR_PAD_LEFT);
@@ -51,17 +82,47 @@ foreach($list as $informe) {
 	}
 
 	$informes[] = $i;
+*/
+
+        $periodstamp = $informe->informe_period_y . str_pad($informe->informe_period_m, 2, 0, STR_PAD_LEFT);
+
+	$informes[] = array('periodstamp' => $periodstamp, 'object' => $informe);
+
 }
+
+error_log("SORT START");
+rsort($informes);
+error_log("SORT END");
+
+$i = array();
 
 foreach($informes as $informe) {
-	echo "<tr>";
-	echo "<td>$informe[1]</td>";
-	echo "<td>$informe[2]</td>";
-	echo "<td>$informe[3]</td>";
-	echo "<td>$informe[4]</td>";
-	echo "<td>$informe[5]</td>";
-	echo "<td>$informe[6]</td>";
-	echo "</tr>";
+	$i[] = $informe['object'];
 }
 
+
+error_log(3);
+//function elgg_view_entity_list($entities, $vars = array(), $offset = 0, $limit = 10, $full_view = true, $list_type_toggle = true, $pagination = true) {
+$body = elgg_view_entity_list($list, array("count" => 1000, "offset" => $offset, "limit" => $limit, "full_view" => false, "list_type_toggle" => true, "pagination" => true));
+//$body = elgg_view_entity_list($i, $vars = array('full_view' => false), $offset = 0, $limit = 10, $pagination = true);
+error_log(4);
+$title = elgg_echo('member_directory:member_directory_title');
+error_log(5);
+$full_view = false;
+
+$body = elgg_view_layout('default', array(
+        'content' => $body,
+        'title' => $title,
+        'filter' => '',
+        'header' => '',
+        'full_view' => false,
+        'pagination' => true,
+));
+
+echo "<table>";
+echo elgg_view_page($title, $body);
 echo "</table>";
+
+
+error_log(6);
+

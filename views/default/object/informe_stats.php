@@ -1,4 +1,5 @@
 <?php
+echo "AAAAAA";
 /**
  * View for informe objects
  *
@@ -8,6 +9,8 @@
 $full = elgg_extract('full_view', $vars, FALSE);
 $informe = elgg_extract('entity', $vars, FALSE);
 
+error_log("aca:");
+error_log(print_r($informe, 1));
 if (!$informe) {
 	return TRUE;
 }
@@ -83,19 +86,6 @@ if ($full) {
 } else {
 	// brief view
 
-	/*
-	$params = array(
-		'entity' => $informe,
-		'metadata' => $metadata,
-		'subtitle' => $subtitle,
-		'content' => $excerpt,
-	);
-	$params = $params + $vars;
-	$list_body = elgg_view('object/elements/summary', $params);
-
-	echo elgg_view_image_block($owner_icon, $list_body);
-	*/
-
 	$params = array(
 		'entity' => $informe,
 		'metadata' => $metadata,
@@ -107,3 +97,4 @@ if ($full) {
 
 	echo elgg_view_image_block($owner_icon, $list_body);
 }
+
