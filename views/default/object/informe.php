@@ -83,6 +83,17 @@ if ($full) {
 } else {
 	// brief view
 
+	$params = array(
+		'entity' => $informe,
+		'metadata' => $metadata,
+		'subtitle' => $subtitle,
+		'content' => $excerpt,
+	);
+	$params = $params + $vars;
+	$list_body = elgg_view('object/elements/summary', $params);
+
+	echo elgg_view_image_block($owner_icon, $list_body);
+
 	/*
 	$params = array(
 		'entity' => $informe,
@@ -91,19 +102,8 @@ if ($full) {
 		'content' => $excerpt,
 	);
 	$params = $params + $vars;
-	$list_body = elgg_view('object/elements/summary', $params);
+	$list_body = elgg_view('object/elements/stats_summary', $params);
 
 	echo elgg_view_image_block($owner_icon, $list_body);
 	*/
-
-	$params = array(
-		'entity' => $informe,
-		'metadata' => $metadata,
-		'subtitle' => $subtitle,
-		'content' => $excerpt,
-	);
-	$params = $params + $vars;
-	$list_body = elgg_view('object/elements/summary', $params);
-
-	echo elgg_view_image_block($owner_icon, $list_body);
 }
