@@ -1,5 +1,4 @@
 <?php
-error_log("aca");
 /**
  * Elgg file download.
  *
