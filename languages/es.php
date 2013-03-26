@@ -17,7 +17,8 @@ $Spanish = Array(
 	'river:create:object:default' => '%s creó %s',
 	'informe:notaninforme' => 'El objeto no es un informe',
 	'informe:noblogs' => 'No hay informes',
-	'admin:administer_utilities:informe_stats' => 'Stats de informes',
+	#'admin:administer_utilities:informe_stats' => 'Stats de informes',
+	'admin:administer_utilities:stats' => 'Estadísticas CR',
 );
 
 add_translation('es', $Spanish);

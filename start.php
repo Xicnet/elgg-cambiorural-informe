@@ -68,7 +68,7 @@ function informe_init() {
 	elgg_register_widget_type('informe', elgg_echo('informe'), elgg_echo('informe:widget:description'));
 
 	// Add admin menu item
-	elgg_register_admin_menu_item('administer', 'informe_stats', 'administer_utilities');
+	elgg_register_admin_menu_item('administer', 'stats', 'administer_utilities');
 
 	// register actions
 	$action_path = elgg_get_plugins_path() . 'informe/actions/informe';
@@ -76,6 +76,8 @@ function informe_init() {
 	elgg_register_action('informe/auto_save_revision', "$action_path/auto_save_revision.php");
 	elgg_register_action('informe/delete', "$action_path/delete.php");
 	elgg_register_action('informe/deleteactivity', "$action_path/deleteactivity.php");
+        error_log("$action_path/download.php");
+        elgg_register_action("informe/download", "$action_path/download.php");
 
 	// entity menu
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'informe_entity_menu_setup');
@@ -188,6 +190,11 @@ function informe_page_handler($page) {
 		case 'all':
 			$params = informe_get_page_content_list();
 			break;
+                case 'download':
+                        set_input('stats_type', $page[1]);
+		        $file_dir = elgg_get_plugins_path() . 'informe/pages/informe';
+                        include "$file_dir/download.php";
+                        break;
 		default:
 			return false;
 	}
