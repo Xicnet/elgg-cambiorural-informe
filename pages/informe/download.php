@@ -12,7 +12,11 @@ switch ($stats_type) {
 		$filename = "$stats_type.csv";
 		$filepath = "/tmp/$filename";
 		break;
-	case 'user_stats':
+	case 'user_stats_all':
+		$filename = "$stats_type.csv";
+		$filepath = "/tmp/$filename";
+		break;
+	case 'user_stats_nologin':
 		$filename = "$stats_type.csv";
 		$filepath = "/tmp/$filename";
 		break;
