@@ -13,7 +13,7 @@ echo "<br/>";
 echo "<a href=\"/informe/download/informe_stats\">Informes</a>";
 echo "<br/>";
 echo "<br/>";
-echo "<a href=\"/informe/download/user_stats_all\">Todos los usuarios usuarios</a>";
+echo "<a href=\"/informe/download/user_stats_all\">Todos los usuarios</a>";
 echo "<br/>";
 echo "<br/>";
 echo "<a href=\"/informe/download/user_stats_nologin\">Usuarios que nunca ingresaron a la red</a>";
