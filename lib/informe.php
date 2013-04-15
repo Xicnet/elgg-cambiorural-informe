@@ -68,6 +68,7 @@ function informe_get_page_content_list($container_guid = NULL) {
 	$loggedin_userid = elgg_get_logged_in_user_guid();
 	if ($container_guid) {
 		// access check for closed groups
+		# Open access to all logged users
 		#group_gatekeeper();
 
 		$options['container_guid'] = $container_guid;
@@ -99,7 +100,8 @@ function informe_get_page_content_list($container_guid = NULL) {
 
 	// show all posts for admin or users looking at their own informes
 	// show only published posts for other users.
-	if (!(elgg_is_admin_logged_in() || (elgg_is_logged_in() && $container_guid == $loggedin_userid))) {
+	//if (!(elgg_is_admin_logged_in() || (elgg_is_logged_in() && $container_guid == $loggedin_userid))) {
+	if (!(elgg_is_admin_logged_in() || (elgg_is_logged_in() && $container->pa == $loggedin_userid))) {
 		$options['metadata_name_value_pairs'] = array(
 			array('name' => 'status', 'value' => 'published'),
 		);

@@ -61,6 +61,8 @@ if (elgg_in_context('widgets')) {
 	$metadata = '';
 }
 
+if($informe->status == "draft") $status = "<b>[ BORRADOR ]</b> ";
+
 if ($full) {
 
 	$body = '<div class="informe-post">' . $informe->getBody() . '</div>';
@@ -75,7 +77,7 @@ if ($full) {
 	$summary = elgg_view('object/elements/summary', $params);
 
 	echo elgg_view('object/elements/full', array(
-		'summary' => $summary,
+		'summary' => $summary . $status,
 		'icon' => $owner_icon,
 		'body' => $body,
 	));
@@ -87,7 +89,7 @@ if ($full) {
 		'entity' => $informe,
 		'metadata' => $metadata,
 		'subtitle' => $subtitle,
-		'content' => $excerpt,
+		'content' => $status . $excerpt,
 	);
 	$params = $params + $vars;
 	$list_body = elgg_view('object/elements/summary', $params);
