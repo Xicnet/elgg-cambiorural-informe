@@ -10,6 +10,9 @@ echo "<h2>Descargas</h2>";
 
 echo "<br/>";
 echo "<br/>";
+echo "<a href=\"/informe/download/informes_aprobados\">Informes Aprobados (mes previo)</a>";
+echo "<br/>";
+echo "<br/>";
 echo "<a href=\"/informe/download/informe_stats\">Informes</a>";
 echo "<br/>";
 echo "<br/>";

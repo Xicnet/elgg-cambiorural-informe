@@ -326,3 +326,15 @@ function informe_run_upgrades($event, $type, $details) {
 		elgg_set_plugin_setting('upgrade_version', 1, 'informes');
 	}
 }
+
+// Period is previous month
+function informe_get_period() {
+	$period = date('Y-m', strtotime(date('Y-m')." -1 month"));
+	list($period_year, $period_month) = explode("-", $period);
+	return array($period_year, $period_month);
+}
+
+function informe_approved_stats_filename() {
+	list($period_year, $period_month) = informe_get_period();
+	return "informes_aprobados-$period_year-$period_month.csv";
+}

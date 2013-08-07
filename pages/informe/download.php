@@ -20,6 +20,11 @@ switch ($stats_type) {
 		$filename = "$stats_type.csv";
 		$filepath = "/tmp/$filename";
 		break;
+	case 'informes_aprobados':
+		list($period_year, $period_month) = informe_get_period();
+		$filename = informe_approved_stats_filename();
+		$filepath = "/tmp/$filename";
+		break;
 	default:
 		return false;
 }
