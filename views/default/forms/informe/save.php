@@ -197,7 +197,7 @@ $approval_input = elgg_view('input/dropdown', array(
 
 $current_user = elgg_get_logged_in_user_entity();
 
-if($informe->meeting_ap == $current_user->getGUID() || $current_user->isAdmin()) {
+if($informe->status == 'published' && ($informe->meeting_ap == $current_user->getGUID() || $current_user->isAdmin())) {
 $approval = '
 <div>
 	<label for="informe_status">'.$approval_label. '</label>

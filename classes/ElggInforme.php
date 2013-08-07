@@ -90,6 +90,12 @@ class ElggInforme extends ElggObject {
 		$informe_productiv = empty($this->productiv) ? elgg_echo('informe:empty:field') : nl2br($this->productiv);
 		$other_comments    = empty($this->other_comments) ? elgg_echo('informe:empty:field') : nl2br($this->other_comments);
 
+		if($this->approval == 'approved') {
+			$approval = '<span style="color: green; font-weight: bold">APROBADO</span>';
+		} else {
+			$approval = '<span style="color: red; font-weight: bold">PENDIENTE</span>';
+		}
+
 		// entity links
 		$options = array('text' => $group->name, 'href' => $group->getURL());
 		$group_link = elgg_view('output/url',  $options);
@@ -249,9 +255,15 @@ $body .= <<<___HTML
 	</div>
 </div>
 
+<p>&nbsp;</p>
+
 <div>
-	<label for="informe_other_comments">Aprobación de informe</label>
-		<p>$other_comments</p>
+	<div class="_block">
+		<label for="informe_approval">Aprobación del informe</label>
+		<br>
+		<br>
+		<p>$approval</p>
+	</div>
 </div>
 
 ___HTML;
