@@ -79,6 +79,7 @@ $values = array(
 	'other_comments' => '',
 	'description' => '',
 	'status' => 'draft',
+	'approval' => 'pending',
 	'access_id' => ACCESS_DEFAULT,
 	'comments_on' => 'On',
 	'container_guid' => $group->guid,
@@ -140,6 +141,7 @@ foreach ($values as $name => $default) {
 		case 'other_comments':
 		case 'topics':
                 case 'meeting_pa':
+                case 'approval':
                 case 'meeting_ap':
 			if ($value) {
 				$values[$name] = $value;

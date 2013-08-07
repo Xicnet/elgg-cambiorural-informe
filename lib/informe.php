@@ -507,6 +507,7 @@ function informe_prepare_form_vars($post = NULL, $revision = NULL) {
 		'tags' => NULL,
 		'container_guid' => NULL,
 		'guid' => NULL,
+		'approval' => NULL,
 		'draft_warning' => '',
 	);
 

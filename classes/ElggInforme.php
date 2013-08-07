@@ -249,6 +249,11 @@ $body .= <<<___HTML
 	</div>
 </div>
 
+<div>
+	<label for="informe_other_comments">Aprobación de informe</label>
+		<p>$other_comments</p>
+</div>
+
 ___HTML;
 
 

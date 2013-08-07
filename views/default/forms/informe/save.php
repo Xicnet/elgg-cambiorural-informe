@@ -184,6 +184,27 @@ $status_input = elgg_view('input/dropdown', array(
 	)
 ));
 
+$approval_label = elgg_echo('Aprobación');
+$approval_input = elgg_view('input/dropdown', array(
+	'name' => 'approval',
+	'id' => 'informe_approval',
+	'value' => $vars['approval'],
+	'options_values' => array(
+		'pending' => elgg_echo('Pendiente'),
+		'approved' => elgg_echo('Aprobado')
+	)
+));
+
+$current_user = elgg_get_logged_in_user_entity();
+
+if($informe->meeting_ap == $current_user->getGUID() || $current_user->isAdmin()) {
+$approval = '
+<div>
+	<label for="informe_status">'.$approval_label. '</label>
+	'.$approval_input. '
+</div>';
+}
+
 $comments_label = elgg_echo('comments');
 $comments_input = elgg_view('input/dropdown', array(
 	'name' => 'comments_on',
@@ -436,6 +457,8 @@ $categories_input
 	<label for="informe_status">$status_label</label>
 	$status_input
 </div>
+
+$approval
 
 <div class="elgg-foot">
 	<div class="elgg-subtext mbm">
