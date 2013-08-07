@@ -262,6 +262,20 @@ if (!$error) {
 		if (($new_post || $old_status == 'draft') && $status == 'published') {
 			add_to_river('river/object/informe/create', 'create', elgg_get_logged_in_user_guid(), $informe->getGUID());
 
+			$ap = get_entity($group->ap);
+			$pa = get_entity($group->pa);
+
+			// send mail to AP notifying there is a new informe pending review
+			$to      = "{$ap->name} <{$ap->email}>";
+			$subject = 'Nuevo informe publicado pendiente de revisión';
+			$body    = "Estimado {$ap->name},\n"
+					. "\n"
+					. "El Promotor Asesor {$pa->name} ha publicado un informe para el grupo {$group->name}.\n"
+					. "\n"
+					. "Por favor, revíselo y si corresponde márquelo como aprobado:\n\n"
+					. $informe->getURL();
+			elgg_send_email	('no-responder-redcambiorural@minagri.gob.ar', 'rama@localhost', $subject, $body);
+
 			if ($guid) {
 				$informe->time_created = time();
 				$informe->save();
