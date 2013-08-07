@@ -48,6 +48,9 @@ if ($guid) {
 // set the previous status for the hooks to update the time_created and river entries
 $old_status = $informe->status;
 
+// set the previous approval status
+$old_approval = $informe->approval;
+
 // set defaults and required values.
 
 if (!elgg_instanceof($group, 'group')) {
@@ -254,8 +257,32 @@ if (!$error) {
 
 		system_message(elgg_echo('informe:message:saved'));
 
-		$status = $informe->status;
+		$status   = $informe->status;
+		$approval = $informe->approval;
 
+		if ($old_approval == 'pending' && $approval == 'approved') {
+			$ap = get_entity($group->ap);
+			$pa = get_entity($group->pa);
+
+			// send mail to AP notifying there is a new informe pending review
+			$to      = "{$pa->name} <{$pa->email}>";
+			$subject = 'Su informe fue aprobado';
+			$body    = "Estimada/o {$pa->name},\n"
+					. "\n"
+					. "El Agente de Proyecto {$ap->name} ha dado por aprobado su informe mensual:\n"
+					. "\n"
+					. "{$informe->title}\n"
+					. "\n"
+					. "Puede verlo en el siguiente link:\n"
+					. $informe->getURL()
+					. "\n"
+					. "\n"
+					. "--\n"
+					. "Le saludamos muy atentamente!\n"
+					. "El equipo de la Red Cambio Rural.\n"
+					. "http://cambiorural.magyp.gob.ar/";
+			elgg_send_email	('no-responder-redcambiorural@minagri.gob.ar', $to, $subject, $body);
+		}
 
 		// add to river if changing status or published, regardless of new post
 		// because we remove it for drafts.
@@ -268,13 +295,19 @@ if (!$error) {
 			// send mail to AP notifying there is a new informe pending review
 			$to      = "{$ap->name} <{$ap->email}>";
 			$subject = 'Nuevo informe publicado pendiente de revisión';
-			$body    = "Estimado {$ap->name},\n"
+			$body    = "Estimada/o {$ap->name},\n"
 					. "\n"
 					. "El Promotor Asesor {$pa->name} ha publicado un informe para el grupo {$group->name}.\n"
 					. "\n"
 					. "Por favor, revíselo y si corresponde márquelo como aprobado:\n\n"
-					. $informe->getURL();
-			elgg_send_email	('no-responder-redcambiorural@minagri.gob.ar', 'rama@localhost', $subject, $body);
+					. $informe->getURL()
+					. "\n"
+					. "\n"
+					. "--\n"
+					. "Le saludamos muy atentamente!\n"
+					. "El equipo de la Red Cambio Rural.\n"
+					. "http://cambiorural.magyp.gob.ar/";
+			elgg_send_email	('no-responder-redcambiorural@minagri.gob.ar', $to, $subject, $body);
 
 			if ($guid) {
 				$informe->time_created = time();
