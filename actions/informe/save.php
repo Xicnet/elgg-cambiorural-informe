@@ -280,7 +280,7 @@ if (!$error) {
 					. "--\n"
 					. "Le saludamos muy atentamente!\n"
 					. "El equipo de la Red Cambio Rural.\n"
-					. "http://cambiorural.magyp.gob.ar/";
+					. "http://www.redcambiorural.magyp.gob.ar/";
 			elgg_send_email	('no-responder-redcambiorural@minagri.gob.ar', $to, $subject, $body);
 		}
 
@@ -306,7 +306,7 @@ if (!$error) {
 					. "--\n"
 					. "Le saludamos muy atentamente!\n"
 					. "El equipo de la Red Cambio Rural.\n"
-					. "http://cambiorural.magyp.gob.ar/";
+					. "http://www.redcambiorural.magyp.gob.ar/";
 			elgg_send_email	('no-responder-redcambiorural@minagri.gob.ar', $to, $subject, $body);
 
 			if ($guid) {
